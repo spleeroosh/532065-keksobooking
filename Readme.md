@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Павел Роговин](https://up.htmlacademy.ru/javascript/13/user/532065).
-* Наставник: `Неизвестно`.
+* Наставник: [Антон Попов](https://up.htmlacademy.ru/javascript/13/user/78239).
 
 ---
 
