@@ -1,7 +1,7 @@
-"use strict";
+'use strict';
 document.querySelector('.map').classList.remove('map--faded');
 var mapPinsList = document.querySelector('.map__pins');
-var mapCardList = document.querySelector('.map')
+var mapCardList = document.querySelector('.map');
 var mapPinsSimilar = document.querySelector('template').content.querySelector('.map__pin');
 var mapCardSimilar = document.querySelector('template').content.querySelector('.map__card');
 var PIN_X = 10;
@@ -22,42 +22,42 @@ var AVATARS = [
 ];
 
 var OFFER_TITLES = [
-  "Большая уютная квартира",
-  "Маленькая неуютная квартира",
-  "Огромный прекрасный дворец",
-  "Маленький ужасный дворец",
-  "Красивый гостевой домик",
-  "Некрасивый негостеприимный домик",
-  "Уютное бунгало далеко от моря",
-  "Неуютное бунгало по колено в воде"
+  'Большая уютная квартира',
+  'Маленькая неуютная квартира',
+  'Огромный прекрасный дворец',
+  'Маленький ужасный дворец',
+  'Красивый гостевой домик',
+  'Некрасивый негостеприимный домик',
+  'Уютное бунгало далеко от моря',
+  'Неуютное бунгало по колено в воде'
 ];
 
 var TYPES = [
-  "palace",
-  "flat",
-  "house",
-  "bungalo"
+  'palace',
+  'flat',
+  'house',
+  'bungalo'
 ];
 
 var CHECK = [
-  "12:00",
-  "13:00",
-  "14:00"
+  '12:00',
+  '13:00',
+  '14:00'
 ];
 
 var FEATURES = [
-  "wifi",
-  "dishwasher",
-  "parking",
-  "washer",
-  "elevator",
-  "conditioner"
+  'wifi',
+  'dishwasher',
+  'parking',
+  'washer',
+  'elevator',
+  'conditioner'
 ];
 
 var PHOTOS = [
-  "http://o0.github.io/assets/images/tokyo/hotel1.jpg",
-  "http://o0.github.io/assets/images/tokyo/hotel2.jpg",
-  "http://o0.github.io/assets/images/tokyo/hotel3.jpg"
+  'http://o0.github.io/assets/images/tokyo/hotel1.jpg',
+  'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
+  'http://o0.github.io/assets/images/tokyo/hotel3.jpg'
 ];
 
 /**
@@ -81,23 +81,23 @@ var getRandomElement = function (array) {
 
 /**
  * Получаем и обрабатываем массив FEATURES
- * @param {Array} FEATURES
+ * @param {Array} array
  * @return {Array} Возвращаем случайный массив из предложенных элементов массива FEATURES
  */
 var getRandomFeatures = function (array) {
-  var newFeatures = [];
+  var randomFeatures = [];
   for (var i = 0; i < randomInteger(1, array.length); i++) {
-    newFeatures[i] = array[i];
+    randomFeatures[i] = array[i];
   }
-  return newFeatures;
+  return randomFeatures;
 };
 
 /**
  * Сортируем массив случайным образом
- * @param {Array} PHOTOS передаем массив с фотографиями
+ * @param {Array} array передаем массив с фотографиями
  * @return {Array} возвращаем отсортированный, в случайном порядке, массив
  */
-var getRandomArray = function (array) {
+var getRandomArray = function () {
   return Math.random() - 0.5;
 };
 
@@ -127,9 +127,9 @@ var getNewPhotos = function (array) {
     var img = document.createElement('img');
     img.className = 'popup__photo';
     img.src = array[i];
-    img.width = "45";
-    img.height = "40"
-    img.alt= "Фотография жилья";
+    img.width = '45';
+    img.height = '40';
+    img.alt= 'Фотография жилья';
     photosFragment.appendChild(img);
   }
   return photosFragment;
@@ -145,30 +145,30 @@ for (var i = 0; i < 8; i++) {
 
   newFeatures[i] = getRandomFeatures(FEATURES);
   flats[i] = {
-    "author": newAvatars[i],
-    "offer":
+    'author': newAvatars[i],
+    'offer':
     {
-      "title" : getRandomElement(OFFER_TITLES),
-      "address" : x + ', ' + y,
-      "price": randomInteger(1000, 1000000) + '₽/ночь',
-      "type": getRandomElement(TYPES),
-      "rooms": randomInteger(1, 5),
-      "guests": randomInteger(1, 10),
-      "checkin": getRandomElement(CHECK),
-      "checkout": getRandomElement(CHECK),
-      "features": newFeatures[i],
-      "description": ' ',
-      "photos": PHOTOS.sort(getRandomArray)
+      'title': getRandomElement(OFFER_TITLES),
+      'address': x + ', ' + y,
+      'price': randomInteger(1000, 1000000) + '₽/ночь',
+      'type': getRandomElement(TYPES),
+      'rooms': randomInteger(1, 5),
+      'guests': randomInteger(1, 10),
+      'checkin': getRandomElement(CHECK),
+      'checkout': getRandomElement(CHECK),
+      'features': newFeatures[i],
+      'description': ' ',
+      'photos': PHOTOS.sort(getRandomArray)
     },
-    "location": {
-      "x": x + PIN_X,
-      "y": y + PIN_Y
+    'location': {
+      'x': x + PIN_X,
+      'y': y + PIN_Y
     }
 
-  }
-  pinsElement.alt = "Метка объявления";
+  };
+  pinsElement.alt = 'Метка объявления';
   pinsElement.querySelector('img').src = flats[i].author;
-  pinsElement.style = "left: " + flats[i].location.x + "px; top: " + flats[i].location.y + "px";
+  pinsElement.style = 'left: ' + flats[i].location.x + 'px; top: ' + flats[i].location.y + 'px';
   fragment.appendChild(pinsElement);
 }
 mapPinsList.appendChild(fragment);
@@ -179,8 +179,8 @@ cardElement.querySelector('.popup__text--address').textContent = flats[0].offer.
 cardElement.querySelector('.popup__title').textContent = flats[0].offer.title;
 cardElement.querySelector('.popup__text--price').textContent = flats[0].offer.price;
 cardElement.querySelector('.popup__type').textContent = flats[0].offer.type;
-cardElement.querySelector('.popup__text--capacity').textContent = flats[0].offer.rooms + " комнаты для " + flats[0].offer.guests + " гостей.";
-cardElement.querySelector('.popup__text--time').textContent = "Заезд после " + flats[0].offer.checkin + ", выезд до " + flats[0].offer.checkout;
+cardElement.querySelector('.popup__text--capacity').textContent = flats[0].offer.rooms + ' комнаты для ' + flats[0].offer.guests + ' гостей.';
+cardElement.querySelector('.popup__text--time').textContent = 'Заезд после ' + flats[0].offer.checkin + ', выезд до ' + flats[0].offer.checkout;
 cardElement.querySelector('.popup__description').textContent = flats[0].offer.description;
 cardElement.querySelector('.popup__features').textContent = '';
 cardElement.querySelector('.popup__photos').textContent = '';
