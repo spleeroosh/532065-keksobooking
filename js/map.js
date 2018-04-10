@@ -129,7 +129,7 @@ var getNewPhotos = function (array) {
     img.src = array[i];
     img.width = '45';
     img.height = '40';
-    img.alt= 'Фотография жилья';
+    img.alt = 'Фотография жилья';
     photosFragment.appendChild(img);
   }
   return photosFragment;
