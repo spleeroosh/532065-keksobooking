@@ -1,15 +1,24 @@
 'use strict';
+var PIN_X = 10;
+var PIN_Y = 30;
+var X_MIN = 300;
+var X_MAX = 900;
+var Y_MIN = 150;
+var Y_MAX = 500;
+var PRICE_MIN = 1000;
+var PRICE_MAX = 1000000;
+var ROOMS_MIN = 1;
+var ROOMS_MAX = 5;
+var GUESTS_MIN = 1;
+var GUESTS_MAX = 10;
+var MIN_ARRAY_LENGTH = 0;
 document.querySelector('.map').classList.remove('map--faded');
 var mapPinsList = document.querySelector('.map__pins');
 var mapCardList = document.querySelector('.map');
 var mapPinsSimilar = document.querySelector('template').content.querySelector('.map__pin');
 var mapCardSimilar = document.querySelector('template').content.querySelector('.map__card');
-var PIN_X = 10;
-var PIN_Y = 30;
-var MIN_ARRAY_LENGTH = 0;
 var flats = [];
 var newAvatars = [];
-var newFeatures = [];
 var AVATARS = [
   'img/avatars/user01.png',
   'img/avatars/user02.png',
@@ -32,12 +41,12 @@ var OFFER_TITLES = [
   'Неуютное бунгало по колено в воде'
 ];
 
-var TYPES = [
-  'palace',
-  'flat',
-  'house',
-  'bungalo'
-];
+var TYPES = {
+  palace: 'Дворец',
+  flat: 'Квартира',
+  house: 'Дом',
+  bungalo: 'Бунгало'
+};
 
 var CHECK = [
   '12:00',
@@ -59,6 +68,22 @@ var PHOTOS = [
   'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
   'http://o0.github.io/assets/images/tokyo/hotel3.jpg'
 ];
+
+/**
+ * Нахождение случайного свойства в массиве
+ * @param {object} obj Передаем объект в функцию
+ * @return {*} Возвращаем случайное свойство из объекта
+ */
+var getRandomProperty = function (obj) {
+  var randomProperty;
+  var count = 0;
+  for (var key in obj) {
+    if (Math.random() < 1 / ++count) {
+    randomProperty = obj[key];
+    }
+  }
+  return randomProperty;
+};
 
 /**
  * Нахождение случайного числа в диапазоне
@@ -93,11 +118,10 @@ var getRandomFeatures = function (array) {
 };
 
 /**
- * Сортируем массив случайным образом
- * @param {Array} array передаем массив с фотографиями
- * @return {Array} возвращаем отсортированный, в случайном порядке, массив
+ * Функция сортировки
+ * * @return {*} возвращаем отсортированный объект/массив
  */
-var getRandomArray = function () {
+var getRandom = function () {
   return Math.random() - 0.5;
 };
 
@@ -135,34 +159,32 @@ var getNewPhotos = function (array) {
   return photosFragment;
 };
 
-newAvatars = AVATARS.sort(getRandomArray);
-
+newAvatars = AVATARS.sort(getRandom);
 var fragment = document.createDocumentFragment();
 for (var i = 0; i < 8; i++) {
   var pinsElement = mapPinsSimilar.cloneNode(true);
-  var x = randomInteger(300, 900);
-  var y = randomInteger(150, 500);
+  var x = randomInteger(X_MIN, X_MAX);
+  var y = randomInteger(Y_MIN, Y_MAX);
 
-  newFeatures[i] = getRandomFeatures(FEATURES);
   flats[i] = {
-    'author': newAvatars[i],
-    'offer':
+    author: newAvatars[i],
+    offer:
     {
-      'title': getRandomElement(OFFER_TITLES),
-      'address': x + ', ' + y,
-      'price': randomInteger(1000, 1000000) + '₽/ночь',
-      'type': getRandomElement(TYPES),
-      'rooms': randomInteger(1, 5),
-      'guests': randomInteger(1, 10),
-      'checkin': getRandomElement(CHECK),
-      'checkout': getRandomElement(CHECK),
-      'features': newFeatures[i],
-      'description': ' ',
-      'photos': PHOTOS.sort(getRandomArray)
+      title: getRandomElement(OFFER_TITLES),
+      address: x + ', ' + y,
+      price: randomInteger(PRICE_MIN, PRICE_MAX) + '₽/ночь',
+      type: getRandomProperty(TYPES),
+      rooms: randomInteger(ROOMS_MIN, ROOMS_MAX),
+      guests: randomInteger(GUESTS_MIN, GUESTS_MAX),
+      checkin: getRandomElement(CHECK),
+      checkout: getRandomElement(CHECK),
+      features: getRandomFeatures(FEATURES.sort(getRandom)),
+      description: ' ',
+      photos: PHOTOS.sort(getRandom)
     },
-    'location': {
-      'x': x + PIN_X,
-      'y': y + PIN_Y
+    location: {
+      x: x + PIN_X,
+      y: y + PIN_Y
     }
 
   };
@@ -185,6 +207,6 @@ cardElement.querySelector('.popup__description').textContent = flats[0].offer.de
 cardElement.querySelector('.popup__features').textContent = '';
 cardElement.querySelector('.popup__photos').textContent = '';
 mapCardList.appendChild(cardElement);
-cardElement.querySelector('ul').appendChild(getNewFeatures(newFeatures[0]));
+cardElement.querySelector('ul').appendChild(getNewFeatures(flats[0].offer.features));//getNewFeatures(newFeatures[0])
 cardElement.querySelector('.popup__photos').appendChild(getNewPhotos(flats[0].offer.photos));
 
