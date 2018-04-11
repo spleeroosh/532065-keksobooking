@@ -79,7 +79,7 @@ var getRandomProperty = function (obj) {
   var count = 0;
   for (var key in obj) {
     if (Math.random() < 1 / ++count) {
-    randomProperty = obj[key];
+      randomProperty = obj[key];
     }
   }
   return randomProperty;
@@ -118,8 +118,8 @@ var getRandomFeatures = function (array) {
 };
 
 /**
- * Функция сортировки
- * * @return {*} возвращаем отсортированный объект/массив
+ * Передаем функию в метод sort, для сортировки массива
+ * @return {number} возвращаем случайное число в диапазоне
  */
 var getRandom = function () {
   return Math.random() - 0.5;
@@ -207,6 +207,6 @@ cardElement.querySelector('.popup__description').textContent = flats[0].offer.de
 cardElement.querySelector('.popup__features').textContent = '';
 cardElement.querySelector('.popup__photos').textContent = '';
 mapCardList.appendChild(cardElement);
-cardElement.querySelector('ul').appendChild(getNewFeatures(flats[0].offer.features));//getNewFeatures(newFeatures[0])
+cardElement.querySelector('ul').appendChild(getNewFeatures(flats[0].offer.features));
 cardElement.querySelector('.popup__photos').appendChild(getNewPhotos(flats[0].offer.photos));
 
