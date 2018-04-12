@@ -177,7 +177,7 @@ var getNewCard = function (pinId) {
   cardElement.querySelector('ul').appendChild(getNewFeatures(flats[pinId].offer.features));
   cardElement.querySelector('.popup__photos').appendChild(getNewPhotos(flats[pinId].offer.photos));
   return cardElement;
-}
+};
 
 newAvatars = AVATARS.sort(getRandom);
 var fragment = document.createDocumentFragment();
@@ -215,28 +215,28 @@ for (var i = 0; i < 8; i++) {
   fragment.appendChild(pinsElement);
 }
 
-var form = document.querySelector('.ad-form')
+var form = document.querySelector('.ad-form');
 var fieldsetArray = form.querySelectorAll('fieldset');
 var mapActivate = document.querySelector('.map__pin--main');
-form.querySelector('fieldset:nth-child(3) > input').placeholder = mapActivate.style.cssText.replace(/\D+/g," ");
+form.querySelector('fieldset:nth-child(3) > input').placeholder = mapActivate.style.cssText.replace(/\D+/g, ' ');
 
-mapActivate.addEventListener('mouseup', function (){
+mapActivate.addEventListener('mouseup', function () {
   document.querySelector('.map').classList.remove('map--faded');
-  form.querySelector('fieldset:nth-child(3) > input').placeholder = mapActivate.style.cssText.replace(/\D+/g," ");
+  form.querySelector('fieldset:nth-child(3) > input').placeholder = mapActivate.style.cssText.replace(/\D+/g, ' ');
   form.classList.remove('ad-form--disabled');
-  for(var i = 0; i < fieldsetArray.length; i++) {
-    fieldsetArray[i].disabled = false;
+  for (var n = 0; n < fieldsetArray.length; n++) {
+    fieldsetArray[n].disabled = false;
   }
   mapPinsList.appendChild(fragment);
   mapCardList.appendChild(getNewCard(0));
-})
+});
 
 mapPinsList.addEventListener('click', function (evt) {
   var target = evt.target;
-  if (target.tagName == 'BUTTON') {
-  getNewCard(target.id);
-  return;
-}
+  if (target.tagName === 'BUTTON') {
+    getNewCard(target.id);
+    return;
+  }
 });
 
 cardElement.querySelector('.popup__close').addEventListener('click', function () {
@@ -245,7 +245,7 @@ cardElement.querySelector('.popup__close').addEventListener('click', function ()
 
 mapPinsList.addEventListener('click', function (evt) {
   var target = evt.target;
-  if (target.tagName == 'BUTTON') {
-  cardElement.classList.remove('hidden');
+  if (target.tagName === 'BUTTON') {
+    cardElement.classList.remove('hidden');
   }
 });
