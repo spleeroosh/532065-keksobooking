@@ -207,7 +207,7 @@ var getNewData = function () {
       }
     };
   }
-return flats;
+  return flats;
 };
 
 var mapPinsList = document.querySelector('.map__pins');
@@ -226,8 +226,8 @@ var renderPins = function (dataArray) {
     var pinsElement = mapPinsSimilar.cloneNode(true);
     pinsElement.alt = 'Метка объявления';
     pinsElement.id = quantity;
-    pinsElement.querySelector('img').src = flats[quantity].author;
-    pinsElement.style = 'left: ' + flats[quantity].location.x + 'px; top: ' + flats[quantity].location.y + 'px';
+    pinsElement.querySelector('img').src = dataArray[quantity].author;
+    pinsElement.style = 'left: ' + dataArray[quantity].location.x + 'px; top: ' + dataArray[quantity].location.y + 'px';
     pinsFragment.appendChild(pinsElement);
   }
 };
@@ -236,11 +236,11 @@ getNewData();
 var form = document.querySelector('.ad-form');
 var fieldsetArray = form.querySelectorAll('fieldset');
 var mapActivate = document.querySelector('.map__pin--main');
-form.querySelector('fieldset:nth-child(3) > input').value = parseInt(mapActivate.style.left) + ', ' + parseInt(mapActivate.style.top);
+form.querySelector('fieldset:nth-child(3) > input').value = parseInt(mapActivate.style.left, 10) + ', ' + parseInt(mapActivate.style.top, 10);
 
 mapActivate.addEventListener('mouseup', function () {
   document.querySelector('.map').classList.remove('map--faded');
-  form.querySelector('fieldset:nth-child(3) > input').value = parseInt(mapActivate.style.left) + ', ' + parseInt(mapActivate.style.top);
+  form.querySelector('fieldset:nth-child(3) > input').value = parseInt(mapActivate.style.left, 10) + ', ' + parseInt(mapActivate.style.top, 10);
   form.classList.remove('ad-form--disabled');
   for (var n = 0; n < fieldsetArray.length; n++) {
     fieldsetArray[n].disabled = false;
