@@ -238,6 +238,91 @@ var fieldsetArray = form.querySelectorAll('fieldset');
 var mapActivate = document.querySelector('.map__pin--main');
 form.querySelector('fieldset:nth-child(3) > input').value = parseInt(mapActivate.style.left, 10) + ', ' + parseInt(mapActivate.style.top, 10);
 
+form.querySelector('fieldset:nth-child(2) > input').required = true;
+form.querySelector('fieldset:nth-child(2) > input').setAttribute('minlength', '30');
+form.querySelector('fieldset:nth-child(2) > input').setAttribute('maxlength','100');
+
+var inputFlatPrice = form.querySelector('fieldset:nth-child(5) > input');
+inputFlatPrice.required = true;
+inputFlatPrice.type = 'number';
+inputFlatPrice.max = '1000000';
+
+var flatType = form.querySelectorAll('fieldset:nth-child(4) > select > option');
+var flatTypeButton = form.querySelector('fieldset:nth-child(4) > select');
+flatTypeButton.addEventListener('click', function () {
+  for (var i = 0; i < flatType.length; i++) {
+    if (flatType[i].selected && flatType[i].value === 'bungalo') {
+      inputFlatPrice.min = '0';
+      inputFlatPrice.placeholder = '0';
+    } else if (flatType[i].selected && flatType[i].value === 'flat') {
+      inputFlatPrice.min = '1000';
+      inputFlatPrice.placeholder = '1000';
+    } else if (flatType[i].selected && flatType[i].value === 'house') {
+      inputFlatPrice.min = '5000';
+      inputFlatPrice.placeholder = '5000';
+    } else if (flatType[i].selected && flatType[i].value === 'palace') {
+      inputFlatPrice.min = '10000';
+      inputFlatPrice.placeholder = '10000';
+    }
+  }
+});
+
+var timeIn = form.querySelectorAll('#timein > option');
+var timeOut = form.querySelectorAll('#timeout > option');
+var timeInButton = form.querySelector('#timein');
+
+timeInButton.addEventListener('click', function () {
+  for (var i = 0; i < timeIn.length; i++) {
+    if (timeIn[i].selected && timeIn[i].value === '12:00') {
+      timeOut[i].selected = 'true';
+    } else if (timeIn[i].selected && timeIn[i].value === '13:00') {
+      timeOut[i].selected = 'true';
+    } else if (timeIn[i].selected && timeIn[i].value === '14:00') {
+      timeOut[i].selected = 'true';
+    }
+  }
+});
+
+var roomNumber = form.querySelectorAll('#room_number > option');
+var roomCapacity = form.querySelectorAll('#capacity > option');
+var roomNumberButton = form.querySelector('#room_number');
+
+roomCapacity[0].disabled = true; // 3 guest
+roomCapacity[1].disabled = true; // 2 guest
+roomCapacity[2].disabled = false; // 1 guest
+roomCapacity[3].disabled = true; // 0 guest
+roomCapacity[2].selected = 'true';
+
+roomNumberButton.addEventListener('click', function () {
+  for (var i = 0; i < roomNumber.length; i++) {
+    if (roomNumber[i].selected && roomNumber[i].value === '1') {
+      roomCapacity[0].disabled = true; // 3 guest
+      roomCapacity[1].disabled = true; // 2 guest
+      roomCapacity[2].disabled = false; // 1 guest
+      roomCapacity[3].disabled = true; // 0 guest
+      roomCapacity[2].selected = 'true';
+    } else if (roomNumber[i].selected && roomNumber[i].value === '2') {
+      roomCapacity[0].disabled = true;
+      roomCapacity[1].disabled = false;
+      roomCapacity[2].disabled = false;
+      roomCapacity[3].disabled = true;
+      roomCapacity[i].selected = 'true';
+    } else if (roomNumber[i].selected && roomNumber[i].value === '3') {
+      roomCapacity[0].disabled = false;
+      roomCapacity[1].disabled = false;
+      roomCapacity[2].disabled = false;
+      roomCapacity[3].disabled = true;
+      roomCapacity[i].selected = 'true';
+    } else if (roomNumber[i].selected && roomNumber[i].value === '100') {
+      roomCapacity[0].disabled = true;
+      roomCapacity[1].disabled = true;
+      roomCapacity[2].disabled = true;
+      roomCapacity[3].disabled = false;
+      roomCapacity[i].selected = 'true';
+    }
+  }
+});
+
 mapActivate.addEventListener('mouseup', function () {
   document.querySelector('.map').classList.remove('map--faded');
   form.querySelector('fieldset:nth-child(3) > input').value = parseInt(mapActivate.style.left, 10) + ', ' + parseInt(mapActivate.style.top, 10);
