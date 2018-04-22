@@ -350,22 +350,18 @@ mapActivate.addEventListener('mousedown', function (evt) {
     mapActivate.style.left = (mapActivate.offsetLeft - shift.x) + 'px';
 
     if ((mapActivate.offsetLeft - shift.x) >= 1150) {
-      document.removeEventListener('mousemove', onMouseMove);
       mapActivate.style.left = 1150 + 'px';
     }
 
     if ((mapActivate.offsetLeft - shift.x <= 0)) {
-      document.removeEventListener('mousemove', onMouseMove);
       mapActivate.style.left = 0 + 'px';
     }
 
     if ((mapActivate.offsetTop - shift.y) >= 620) {
-      document.removeEventListener('mousemove', onMouseMove);
       mapActivate.style.top = 620 + 'px';
     }
 
     if ((mapActivate.offsetTop - shift.y <= 100 )) {
-      document.removeEventListener('mousemove', onMouseMove);
       mapActivate.style.top = 100 + 'px';
     }
   };
@@ -383,6 +379,7 @@ mapActivate.addEventListener('mousedown', function (evt) {
 
 mapPinsList.addEventListener('click', function (evt) {
   var target = evt.target;
+
   if (target.tagName === 'BUTTON') {
     mapCardList.appendChild(renderNewCard(flats[target.id]));
     cardElement.classList.remove('hidden');
