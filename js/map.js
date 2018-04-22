@@ -207,8 +207,8 @@ var getNewData = function () {
         photos: PHOTOS.sort(sortArray)
       },
       location: {
-        x: x + PIN_X,
-        y: y + PIN_Y
+        x: x,
+        y: y
       }
     };
   }
@@ -221,7 +221,6 @@ var mapPinsSimilar = document.querySelector('template').content.querySelector('.
 var mapCardSimilar = document.querySelector('template').content.querySelector('.map__card');
 var cardElement = mapCardSimilar.cloneNode(true);
 
-
 /**
  * Функция отрисовки меток pins
  * @param {Array} dataArray Передаем массив данных для заполнения pins и cards
@@ -233,7 +232,7 @@ var renderPins = function (dataArray) {
     pinsElement.alt = 'Метка объявления';
     pinsElement.id = quantity;
     pinsElement.querySelector('img').src = dataArray[quantity].author;
-    pinsElement.style = 'left: ' + dataArray[quantity].location.x + 'px; top: ' + dataArray[quantity].location.y + 'px';
+    pinsElement.style = `left: ${dataArray[quantity].location.x + PIN_X}px; top: ${dataArray[quantity].location.y + PIN_Y}px`;
     pinsFragment.appendChild(pinsElement);
   }
   return pinsFragment;
@@ -241,11 +240,11 @@ var renderPins = function (dataArray) {
 
 var flats = [];
 getNewData();
-//////////////////validity/////////////////////
+//////////////////Валидация форм/////////////////////
 var form = document.querySelector('.ad-form');
 var fieldsetArray = form.querySelectorAll('fieldset');
 var mapActivate = document.querySelector('.map__pin--main');
-form.querySelector('#address').value = parseInt(mapActivate.style.left, 10) + ', ' + parseInt(mapActivate.style.top, 10);
+form.querySelector('#address').value = parseInt(mapActivate.style.left + PIN_X, 10)  + ', ' + parseInt(mapActivate.style.top + PIN_Y, 10) ;
 
 var titleForm = form.querySelector('#title');
 titleForm.required = true;
@@ -316,10 +315,10 @@ roomNumber.addEventListener('change', function (evt) {
       roomCapacity[3].selected = true;
     }
 });
-//////////////////////listenery/////////////////////////////
+//////////////////////Ивент_листнеры/////////////////////////////
 mapActivate.addEventListener('mouseup', function () {
   document.querySelector('.map').classList.remove('map--faded');
-  form.querySelector('#address').value = parseInt(mapActivate.style.left, 10) + ', ' + parseInt(mapActivate.style.top, 10);
+  form.querySelector('#address').value = parseInt(mapActivate.style.left + PIN_X, 10) + ', ' + parseInt(mapActivate.style.top + PIN_Y, 10);
   form.classList.remove('ad-form--disabled');
   for (var n = 0; n < fieldsetArray.length; n++) {
     fieldsetArray[n].disabled = false;
@@ -349,6 +348,15 @@ mapActivate.addEventListener('mousedown', function (evt) {
 
     mapActivate.style.top = (mapActivate.offsetTop - shift.y) + 'px';
     mapActivate.style.left = (mapActivate.offsetLeft - shift.x) + 'px';
+
+    if (mapActivate.offsetLeft >= 1150 || mapActivate.offsetLeft < 0) {
+      document.removeEventListener('mousemove', onMouseMove);
+    }
+
+    if (mapActivate.offsetTop >= 620 || mapActivate.offsetTop < 100) {
+      document.removeEventListener('mousemove', onMouseMove);
+    }
+
   };
 
   var onMouseUp = function (upEvt) {
