@@ -349,14 +349,25 @@ mapActivate.addEventListener('mousedown', function (evt) {
     mapActivate.style.top = (mapActivate.offsetTop - shift.y) + 'px';
     mapActivate.style.left = (mapActivate.offsetLeft - shift.x) + 'px';
 
-    if (mapActivate.offsetLeft >= 1150 || mapActivate.offsetLeft < 0) {
+    if ((mapActivate.offsetLeft - shift.x) >= 1150) {
       document.removeEventListener('mousemove', onMouseMove);
+      mapActivate.style.left = 1150 + 'px';
     }
 
-    if (mapActivate.offsetTop >= 620 || mapActivate.offsetTop < 100) {
+    if ((mapActivate.offsetLeft - shift.x <= 0)) {
       document.removeEventListener('mousemove', onMouseMove);
+      mapActivate.style.left = 0 + 'px';
     }
 
+    if ((mapActivate.offsetTop - shift.y) >= 620) {
+      document.removeEventListener('mousemove', onMouseMove);
+      mapActivate.style.top = 620 + 'px';
+    }
+
+    if ((mapActivate.offsetTop - shift.y <= 100 )) {
+      document.removeEventListener('mousemove', onMouseMove);
+      mapActivate.style.top = 100 + 'px';
+    }
   };
 
   var onMouseUp = function (upEvt) {
