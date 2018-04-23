@@ -232,7 +232,7 @@ var renderPins = function (dataArray) {
     pinsElement.alt = 'Метка объявления';
     pinsElement.id = quantity;
     pinsElement.querySelector('img').src = dataArray[quantity].author;
-    pinsElement.style = `left: ${dataArray[quantity].location.x + PIN_X}px; top: ${dataArray[quantity].location.y + PIN_Y}px`;
+    pinsElement.style = 'left: ' + parseInt(dataArray[quantity].location.x + PIN_X) + 'px; top: ' + parseInt(dataArray[quantity].location.y + PIN_Y) + 'px';
     pinsFragment.appendChild(pinsElement);
   }
   return pinsFragment;
@@ -289,6 +289,8 @@ roomCapacity[2].selected = true;
 
 roomNumber.addEventListener('change', function (evt) {
   var selectedRoomNumber = roomNumber.value;
+  //console.log(roomCapacity[selectedRoomNumber]);
+
   if (selectedRoomNumber === '1') {
       roomCapacity[0].disabled = true; // 3 guest
       roomCapacity[1].disabled = true; // 2 guest
@@ -314,6 +316,7 @@ roomNumber.addEventListener('change', function (evt) {
       roomCapacity[3].disabled = false;
       roomCapacity[3].selected = true;
     }
+
 });
 //////////////////////Ивент_листнеры/////////////////////////////
 mapActivate.addEventListener('mouseup', function () {
