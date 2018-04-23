@@ -71,175 +71,13 @@ var PHOTOS = [
   'http://o0.github.io/assets/images/tokyo/hotel3.jpg'
 ];
 
-/**
- * Нахождение случайного свойства в массиве
- * @param {object} obj Передаем объект в функцию
- * @return {*} Возвращаем случайное свойство из объекта
- */
-var getRandomProperty = function (obj) {
-  var randomProperty;
-  var count = 0;
-  for (var key in obj) {
-    if (Math.random() < 1 / ++count) {
-      randomProperty = obj[key];
-    }
-  }
-  return randomProperty;
-};
-
-/**
- * Нахождение случайного числа в диапазоне
- * @param {number} min минимальное число в диапазоне
- * @param {number} max максимальное число в диапазоне
- * @return {number} Возвращаем случайное число в диапазоне от min до max
- */
-var randomInteger = function (min, max) {
-  return Math.round(min - 0.5 + Math.random() * (max - min + 1));
-};
-
-/**
- * Нахождение случайного элемента в массиве
- * @param {Array} array передаем массив данных
- * @return {*} возвращаем случайный элемент массива
- */
-var getRandomElement = function (array) {
-  return array[randomInteger(MIN_ARRAY_LENGTH, array.length - 1)];
-};
-
-/**
- * Получаем и обрабатываем массив FEATURES
- * @param {Array} array
- * @return {Array} Возвращаем случайный массив из предложенных элементов массива FEATURES
- */
-var getRandomFeatures = function (array) {
-  var randomFeatures = [];
-  for (var i = 0; i < randomInteger(1, array.length); i++) {
-    randomFeatures[i] = array[i];
-  }
-  return randomFeatures;
-};
-
-/**
- * Передаем функию в метод sort, для сортировки массива
- * @return {number} возвращаем случайное число в диапазоне
- */
-var sortArray = function () {
-  return Math.random() - 0.5;
-};
-
-/**
- * Добавляет в ДОМ список li с классами, соответствующими массиву
- * @param {Array} array передаем массив features
- * @return {*} возвращаем featuresFragment
- */
-var getNewFeatures = function (array) {
-  var featuresFragment = document.createDocumentFragment();
-  for (var i = 0; i < array.length; i++) {
-    var li = document.createElement('li');
-    li.className = 'popup__feature popup__feature--' + array[i];
-    featuresFragment.appendChild(li);
-  }
-  return featuresFragment;
-};
-
-/**
- * Добавляет в ДОМ img с src, соответствующими массиву
- * @param {Array} array передаем массив photos
- * @return {*} возвращаем photosFragment
- */
-var getNewPhotos = function (array) {
-  var photosFragment = document.createDocumentFragment();
-  for (var i = 0; i < array.length; i++) {
-    var img = document.createElement('img');
-    img.className = 'popup__photo';
-    img.src = array[i];
-    img.width = '45';
-    img.height = '40';
-    img.alt = 'Фотография жилья';
-    photosFragment.appendChild(img);
-  }
-  return photosFragment;
-};
-/**
- * Функция отрисовки новой карточки
- * @param {Object} flatsObj Передаем объект массива flats
- * @return {*} Возвращаем новую карточку, отрисованную на основе данных объекта из массива flats
- */
-var renderNewCard = function (flatsObj) {
-  cardElement.querySelector('img').src = flatsObj.author;
-  cardElement.querySelector('.popup__text--address').textContent = flatsObj.offer.address;
-  cardElement.querySelector('.popup__title').textContent = flatsObj.offer.title;
-  cardElement.querySelector('.popup__text--price').textContent = flatsObj.offer.price;
-  cardElement.querySelector('.popup__type').textContent = flatsObj.offer.type;
-  cardElement.querySelector('.popup__text--capacity').textContent = flatsObj.offer.rooms + ' комнаты для ' + flatsObj.offer.guests + ' гостей.';
-  cardElement.querySelector('.popup__text--time').textContent = 'Заезд после ' + flatsObj.offer.checkin + ', выезд до ' + flatsObj.offer.checkout;
-  cardElement.querySelector('.popup__description').textContent = flatsObj.offer.description;
-  cardElement.querySelector('.popup__features').textContent = '';
-  cardElement.querySelector('.popup__photos').textContent = '';
-  cardElement.querySelector('ul').appendChild(getNewFeatures(flatsObj.offer.features));
-  cardElement.querySelector('.popup__photos').appendChild(getNewPhotos(flatsObj.offer.photos));
-  return cardElement;
-};
-
-/**
- * Функция создания массива данных для pins и cards
- * @return {array} Возвращает массив с данными
- */
-var getNewData = function () {
-  var newAvatars = AVATARS.sort(sortArray);
-  for (var i = 0; i < PINS_QUANTITY; i++) {
-    var x = randomInteger(X_MIN, X_MAX);
-    var y = randomInteger(Y_MIN, Y_MAX);
-    flats[i] = {
-      author: newAvatars[i],
-      offer:
-      {
-        title: getRandomElement(OFFER_TITLES),
-        address: x + ', ' + y,
-        price: randomInteger(PRICE_MIN, PRICE_MAX) + '₽/ночь',
-        type: getRandomProperty(TYPES),
-        rooms: randomInteger(ROOMS_MIN, ROOMS_MAX),
-        guests: randomInteger(GUESTS_MIN, GUESTS_MAX),
-        checkin: getRandomElement(CHECK),
-        checkout: getRandomElement(CHECK),
-        features: getRandomFeatures(FEATURES.sort(sortArray)),
-        description: ' ',
-        photos: PHOTOS.sort(sortArray)
-      },
-      location: {
-        x: x,
-        y: y
-      }
-    };
-  }
-  return flats;
-};
-
 var mapPinsList = document.querySelector('.map__pins');
 var mapCardList = document.querySelector('.map');
 var mapPinsSimilar = document.querySelector('template').content.querySelector('.map__pin');
 var mapCardSimilar = document.querySelector('template').content.querySelector('.map__card');
 var cardElement = mapCardSimilar.cloneNode(true);
-
-/**
- * Функция отрисовки меток pins
- * @param {Array} dataArray Передаем массив данных для заполнения pins и cards
- */
-var renderPins = function (dataArray) {
-  var pinsFragment = document.createDocumentFragment();
-  for (var quantity = 0; quantity < PINS_QUANTITY; quantity++) {
-    var pinsElement = mapPinsSimilar.cloneNode(true);
-    pinsElement.alt = 'Метка объявления';
-    pinsElement.id = quantity;
-    pinsElement.querySelector('img').src = dataArray[quantity].author;
-    pinsElement.style = 'left: ' + parseInt(dataArray[quantity].location.x + PIN_X) + 'px; top: ' + parseInt(dataArray[quantity].location.y + PIN_Y) + 'px';
-    pinsFragment.appendChild(pinsElement);
-  }
-  return pinsFragment;
-};
-
 var flats = [];
-getNewData();
+window.data.getNewData();
 //////////////////Валидация форм/////////////////////
 var form = document.querySelector('.ad-form');
 var fieldsetArray = form.querySelectorAll('fieldset');
@@ -326,7 +164,7 @@ mapActivate.addEventListener('mouseup', function () {
   for (var n = 0; n < fieldsetArray.length; n++) {
     fieldsetArray[n].disabled = false;
   }
-  mapPinsList.appendChild(renderPins(flats));
+  mapPinsList.appendChild(window.pins.renderPins(flats));
 });
 
 mapActivate.addEventListener('mousedown', function (evt) {
@@ -384,18 +222,13 @@ mapPinsList.addEventListener('click', function (evt) {
   var target = evt.target;
 
   if (target.tagName === 'BUTTON') {
-    mapCardList.appendChild(renderNewCard(flats[target.id]));
+    mapCardList.appendChild(window.card.renderNewCard(flats[target.id]));
     cardElement.classList.remove('hidden');
   } else if (target.tagName === 'IMG') {
-    mapCardList.appendChild(renderNewCard(flats[target.parentElement.id]));
+    mapCardList.appendChild(window.card.renderNewCard(flats[target.parentElement.id]));
     cardElement.classList.remove('hidden');
   }
 });
-
-cardElement.querySelector('.popup__close').addEventListener('click', function () {
-  cardElement.classList.add('hidden');
-});
-
 
 
 
