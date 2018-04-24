@@ -1,7 +1,8 @@
 'use strict';
 (function () {
   var mapCardSimilar = document.querySelector('template').content.querySelector('.map__card');
-  window.cardElement = mapCardSimilar.cloneNode(true);
+  var cardElement = mapCardSimilar.cloneNode(true);
+  window.cardElement = cardElement;
   window.card = {
     /**
      * Функция отрисовки новой карточки
