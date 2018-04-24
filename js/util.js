@@ -1,5 +1,4 @@
 'use strict';
-
 (function () {
   window.util = {
     /**
@@ -40,7 +39,7 @@
      * @return {*} возвращаем случайный элемент массива
      */
     getRandomElement: function (array) {
-      return array[window.util.randomInteger(MIN_ARRAY_LENGTH, array.length - 1)];
+      return array[window.util.randomInteger(window.MIN_ARRAY_LENGTH, array.length - 1)];
     },
     /**
      * Получаем и обрабатываем массив FEATURES

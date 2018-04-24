@@ -1,4 +1,9 @@
+'use strict';
 (function () {
+  window.PINS_QUANTITY = 8;
+  window.PIN_X = 20;
+  window.PIN_Y = 44;
+  var mapPinsSimilar = document.querySelector('template').content.querySelector('.map__pin');
   window.pins = {
     /**
      * Функция отрисовки меток pins
