@@ -2,8 +2,6 @@
 (function () {
 
   window.MIN_ARRAY_LENGTH = 0;
-  var flats = [];
-  window.flats = flats;
 
   var mapPinsList = document.querySelector('.map__pins');
   var mapCardList = document.querySelector('.map');
@@ -16,16 +14,16 @@
   mapPinsList.addEventListener('click', function (evt) {
     var target = evt.target;
     if (target.tagName === 'BUTTON') {
-      mapCardList.appendChild(window.card.renderNewCard(flats[target.id]));
+      mapCardList.appendChild(window.card.renderNewCard(window.flats[target.id]));
       window.cardElement.classList.remove('hidden');
     } else if (target.tagName === 'IMG') {
-      mapCardList.appendChild(window.card.renderNewCard(flats[target.parentElement.id]));
+      mapCardList.appendChild(window.card.renderNewCard(window.flats[target.parentElement.id]));
       window.cardElement.classList.remove('hidden');
     }
   });
 
   window.cardElement.querySelector('.popup__close').addEventListener('click', function () {
-    cardElement.classList.add('hidden');
+    window.cardElement.classList.add('hidden');
   });
 })();
 

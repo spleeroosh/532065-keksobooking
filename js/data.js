@@ -62,6 +62,9 @@
   var GUESTS_MIN = 1;
   var GUESTS_MAX = 10;
 
+  var flats = [];
+  window.flats = flats;
+
   window.data = {
     /**
      * Добавляет в ДОМ список li с классами, соответствующими массиву
