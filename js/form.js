@@ -5,7 +5,7 @@
     flat: 1000,
     house: 5000,
     bungalo: 0
-  }
+  };
 
   var titleForm = window.form.querySelector('#title');
   titleForm.required = true;
@@ -29,12 +29,12 @@
   var timeOut = window.form.querySelector('#timeout');
 
   timeIn.addEventListener('change', function () {
-    var selectedTimeIn = timeIn.value
+    var selectedTimeIn = timeIn.value;
     timeOut.value = selectedTimeIn;
   });
 
   timeOut.addEventListener('change', function () {
-    var selectedTimeOut = timeOut.value
+    var selectedTimeOut = timeOut.value;
     timeIn.value = selectedTimeOut;
   });
 
@@ -47,7 +47,7 @@
   roomCapacity[3].disabled = true; // 0 guest
   roomCapacity[2].selected = true;
 
-  roomNumber.addEventListener('change', function (evt) {
+  roomNumber.addEventListener('change', function () {
     var selectedRoomNumber = roomNumber.value;
     if (selectedRoomNumber === '1') {
       roomCapacity[0].disabled = true; // 3 guest

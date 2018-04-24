@@ -5,7 +5,7 @@
   var MIN_LEFT = 0;
   var MIN_TOP = 100;
   var mapActivate = document.querySelector('.map__pin--main');
-  window.form.querySelector('#address').value = parseInt(mapActivate.style.left + window.PIN_X, 10)  + ', ' + parseInt(mapActivate.style.top + window.PIN_Y, 10) ;
+  window.form.querySelector('#address').value = parseInt(mapActivate.style.left + window.PIN_X, 10) + ', ' + parseInt(mapActivate.style.top + window.PIN_Y, 10);
   var fieldsetArray = window.form.querySelectorAll('fieldset');
 
   mapActivate.addEventListener('mouseup', function () {
@@ -15,7 +15,7 @@
     for (var n = 0; n < fieldsetArray.length; n++) {
       fieldsetArray[n].disabled = false;
     }
-    mapPinsList.appendChild(window.pins.renderPins(flats));
+    window.mapPinsList.appendChild(window.pins.renderPins(window.flats));
   });
 
 
@@ -54,7 +54,7 @@
         mapActivate.style.top = MAX_TOP + 'px';
       }
 
-      if ((mapActivate.offsetTop - shift.y <= 100 )) {
+      if ((mapActivate.offsetTop - shift.y <= 100)) {
         mapActivate.style.top = MIN_TOP + 'px';
       }
     };

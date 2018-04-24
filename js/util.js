@@ -21,7 +21,6 @@
           randomProperty = obj[key];
         }
       }
-      console.log(randomProperty);
       return randomProperty;
     },
     /**
