@@ -14,15 +14,9 @@
     var target = evt.target;
     if (target.tagName === 'BUTTON') {
       mapCardList.appendChild(window.card.renderNew(window.flats[target.id]));
-      window.cardElement.classList.remove('hidden');
     } else if (target.tagName === 'IMG') {
       mapCardList.appendChild(window.card.renderNew(window.flats[target.parentElement.id]));
-      window.cardElement.classList.remove('hidden');
     }
-  });
-
-  window.cardElement.querySelector('.popup__close').addEventListener('click', function () {
-    window.cardElement.classList.add('hidden');
   });
 })();
 

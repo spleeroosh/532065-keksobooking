@@ -2,7 +2,7 @@
 (function () {
   var mapCardSimilar = document.querySelector('template').content.querySelector('.map__card');
   var cardElement = mapCardSimilar.cloneNode(true);
-  window.cardElement = cardElement;
+
   window.card = {
     /**
      * Функция отрисовки новой карточки
@@ -22,6 +22,10 @@
       cardElement.querySelector('.popup__photos').textContent = '';
       cardElement.querySelector('ul').appendChild(window.data.getNewFeatures(flatsObj.offer.features));
       cardElement.querySelector('.popup__photos').appendChild(window.data.getNewPhotos(flatsObj.offer.photos));
+      cardElement.classList.remove('hidden');
+      cardElement.querySelector('.popup__close').addEventListener('click', function () {
+        cardElement.classList.add('hidden');
+       });
       return cardElement;
     }
   };
