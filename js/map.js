@@ -8,7 +8,7 @@
   window.mapPinsList = mapPinsList;
   window.mapCardList = mapCardList;
 
-  window.data.getNewData();
+  window.data.getNew();
 
   mapPinsList.addEventListener('click', function (evt) {
     var target = evt.target;

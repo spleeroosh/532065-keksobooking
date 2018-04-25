@@ -101,7 +101,7 @@
     /**
      * Функция создания массива данных для pins и cards
      */
-    getNewData: function () {
+    getNew: function () {
       var newAvatars = AVATARS.sort(window.util.sortArray);
       for (var i = 0; i < window.PINS_QUANTITY; i++) {
         var x = window.util.randomInteger(X_MIN, X_MAX);
