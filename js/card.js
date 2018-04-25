@@ -25,7 +25,7 @@
       cardElement.classList.remove('hidden');
       cardElement.querySelector('.popup__close').addEventListener('click', function () {
         cardElement.classList.add('hidden');
-       });
+      });
       return cardElement;
     }
   };
