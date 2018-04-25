@@ -12,9 +12,9 @@
 
   mapPinsList.addEventListener('click', function (evt) {
     var target = evt.target;
-    if (target.tagName === 'BUTTON') {
+    if (target.tagName === 'BUTTON' && target.className != 'map__pin map__pin--main') {
       mapCardList.appendChild(window.card.renderNew(window.flats[target.id]));
-    } else if (target.tagName === 'IMG') {
+    } else if (target.tagName === 'IMG' && target.parentElement.className != 'map__pin map__pin--main') {
       mapCardList.appendChild(window.card.renderNew(window.flats[target.parentElement.id]));
     }
   });
