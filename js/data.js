@@ -100,7 +100,6 @@
     },
     /**
      * Функция создания массива данных для pins и cards
-     * @return {array} Возвращает массив с данными
      */
     getNewData: function () {
       var newAvatars = AVATARS.sort(window.util.sortArray);
@@ -129,7 +128,6 @@
           }
         };
       }
-      //return flats;
     }
   };
 })();
