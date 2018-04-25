@@ -3,19 +3,19 @@
 
   window.MIN_ARRAY_LENGTH = 0;
 
-  var mapPinsList = document.querySelector('.map__pins');
-  var mapCardList = document.querySelector('.map');
-  window.mapPinsList = mapPinsList;
-  window.mapCardList = mapCardList;
+  var mapPinsContainer = document.querySelector('.map__pins');
+  var map = document.querySelector('.map');
+  window.mapPinsContainer = mapPinsContainer;
 
-  window.data.getNew();
+  var newData = window.data.getNew();
+  window.newData = newData;
 
-  mapPinsList.addEventListener('click', function (evt) {
+  mapPinsContainer.addEventListener('click', function (evt) {
     var target = evt.target;
     if (target.tagName === 'BUTTON' && target.className != 'map__pin map__pin--main') {
-      mapCardList.appendChild(window.card.renderNew(window.flats[target.id]));
+      map.appendChild(window.card.render(newData[target.id]));
     } else if (target.tagName === 'IMG' && target.parentElement.className != 'map__pin map__pin--main') {
-      mapCardList.appendChild(window.card.renderNew(window.flats[target.parentElement.id]));
+      map.appendChild(window.card.render(newData[target.parentElement.id]));
     }
   });
 })();

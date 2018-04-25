@@ -62,8 +62,8 @@
   var GUESTS_MIN = 1;
   var GUESTS_MAX = 10;
 
-  var flats = [];
-  window.flats = flats;
+  // var flats = [];
+  // window.flats = flats;
 
   window.data = {
     /**
@@ -102,6 +102,7 @@
      * Функция создания массива данных для pins и cards
      */
     getNew: function () {
+      var flats = [];
       var newAvatars = AVATARS.sort(window.util.sortArray);
       for (var i = 0; i < window.PINS_QUANTITY; i++) {
         var x = window.util.randomInteger(X_MIN, X_MAX);
@@ -128,6 +129,7 @@
           }
         };
       }
+      return flats;
     }
   };
 })();

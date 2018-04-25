@@ -13,7 +13,7 @@
      * @param {Array} dataArray Передаем массив данных для заполнения pins и cards
      * @return {*} Возвращаем pinsFragment с готовыми метками
      */
-    renderNew: function (dataArray) {
+    render: function (dataArray) {
       var pinsFragment = document.createDocumentFragment();
       for (var quantity = 0; quantity < PINS_QUANTITY; quantity++) {
         var pinsElement = mapPinsSimilar.cloneNode(true);
