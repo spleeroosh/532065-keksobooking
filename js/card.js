@@ -9,7 +9,7 @@
      * @param {Object} flatsObj Передаем объект массива flats
      * @return {*} Возвращаем новую карточку, отрисованную на основе данных объекта из массива flats
      */
-    renderNewCard: function (flatsObj) {
+    renderNew: function (flatsObj) {
       cardElement.querySelector('img').src = flatsObj.author;
       cardElement.querySelector('.popup__text--address').textContent = flatsObj.offer.address;
       cardElement.querySelector('.popup__title').textContent = flatsObj.offer.title;

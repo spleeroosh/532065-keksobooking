@@ -6,18 +6,19 @@
     house: 5000,
     bungalo: 0
   };
-
-  var titleForm = window.form.querySelector('#title');
+  var form = document.querySelector('.ad-form');
+  window.form = form;
+  var titleForm = form.querySelector('#title');
   titleForm.required = true;
   titleForm.setAttribute('minlength', '30');
   titleForm.setAttribute('maxlength', '100');
 
-  var inputFlatPrice = window.form.querySelector('#price');
+  var inputFlatPrice = form.querySelector('#price');
   inputFlatPrice.required = true;
   inputFlatPrice.max = '1000000';
   inputFlatPrice.placeholder = 0;
 
-  var flatTypeButton = window.form.querySelector('#type');
+  var flatTypeButton = form.querySelector('#type');
 
   flatTypeButton.addEventListener('change', function () {
     var typePrice = flatTypeButton.value;
@@ -25,8 +26,8 @@
     inputFlatPrice.placeholder = MIN_PRICES[typePrice];
   });
 
-  var timeIn = window.form.querySelector('#timein');
-  var timeOut = window.form.querySelector('#timeout');
+  var timeIn = form.querySelector('#timein');
+  var timeOut = form.querySelector('#timeout');
 
   timeIn.addEventListener('change', function () {
     var selectedTimeIn = timeIn.value;
@@ -38,8 +39,8 @@
     timeIn.value = selectedTimeOut;
   });
 
-  var roomNumber = window.form.querySelector('#room_number');
-  var roomCapacity = window.form.querySelector('#capacity');
+  var roomNumber = form.querySelector('#room_number');
+  var roomCapacity = form.querySelector('#capacity');
 
   roomCapacity[0].disabled = true; // 3 guest
   roomCapacity[1].disabled = true; // 2 guest

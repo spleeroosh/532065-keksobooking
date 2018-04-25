@@ -9,15 +9,14 @@
   window.mapCardList = mapCardList;
 
   window.data.getNewData();
-  window.form = document.querySelector('.ad-form');
 
   mapPinsList.addEventListener('click', function (evt) {
     var target = evt.target;
     if (target.tagName === 'BUTTON') {
-      mapCardList.appendChild(window.card.renderNewCard(window.flats[target.id]));
+      mapCardList.appendChild(window.card.renderNew(window.flats[target.id]));
       window.cardElement.classList.remove('hidden');
     } else if (target.tagName === 'IMG') {
-      mapCardList.appendChild(window.card.renderNewCard(window.flats[target.parentElement.id]));
+      mapCardList.appendChild(window.card.renderNew(window.flats[target.parentElement.id]));
       window.cardElement.classList.remove('hidden');
     }
   });
