@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 (function () {
   var URL = 'https://js.dump.academy/keksobooking';
   window.backend = {
