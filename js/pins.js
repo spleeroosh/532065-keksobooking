@@ -19,7 +19,7 @@
         var pinsElement = mapPinsSimilar.cloneNode(true);
         pinsElement.alt = 'Метка объявления';
         pinsElement.id = quantity;
-        pinsElement.querySelector('img').src = dataArray[quantity].author;
+        pinsElement.querySelector('img').src = dataArray[quantity].author.avatar;
         pinsElement.style = 'left: ' + parseInt(dataArray[quantity].location.x + PIN_X, 10) + 'px; top: ' + parseInt(dataArray[quantity].location.y + PIN_Y, 10) + 'px';
         pinsFragment.appendChild(pinsElement);
       }

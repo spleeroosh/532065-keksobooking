@@ -15,7 +15,10 @@
     for (var n = 0; n < fieldsetArray.length; n++) {
       fieldsetArray[n].disabled = false;
     }
-    window.mapPinsContainer.appendChild(window.pins.render(window.newData));
+    var successHandlerForPins = function (nData) {
+      window.mapPinsContainer.appendChild(window.pins.render(nData));
+    };
+    window.backend.download(successHandlerForPins, window.errorHandler);
   });
 
 

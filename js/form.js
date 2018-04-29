@@ -19,7 +19,6 @@
   inputFlatPrice.placeholder = 0;
 
   var flatTypeButton = form.querySelector('#type');
-
   flatTypeButton.addEventListener('change', function () {
     var typePrice = flatTypeButton.value;
     inputFlatPrice.min = MIN_PRICES[typePrice];
@@ -75,5 +74,36 @@
       roomCapacity[3].disabled = false;
       roomCapacity[3].selected = true;
     }
+  });
+
+  form.addEventListener('submit', function (evt) {
+    window.backend.upload(new FormData(form), function (response) {
+      flatTypeButton[1].selected = true;
+      inputFlatPrice.value = '';
+      inputFlatPrice.min = MIN_PRICES['bungalo'];
+      inputFlatPrice.placeholder = MIN_PRICES['bungalo'];
+      titleForm.value = '';
+      timeIn.value = '12:00';
+      timeOut.value = timein.value;
+
+      var roomNumber = form.querySelector('#room_number');
+      var roomCapacity = form.querySelector('#capacity');
+      roomNumber[0].selected = true;
+      roomCapacity[0].disabled = true; // 3 guest
+      roomCapacity[1].disabled = true; // 2 guest
+      roomCapacity[2].disabled = false; // 1 guest
+      roomCapacity[3].disabled = true; // 0 guest
+      roomCapacity[2].selected = true;
+
+      document.querySelector('.map__pin--main').style.left = '570px';
+      document.querySelector('.map__pin--main').style.top = '375px';
+      form.querySelector('#address').value = '570, 375';
+
+      var featuresChecked = form.querySelectorAll('.feature__checkbox');
+      for (var i = 0; i < featuresChecked.length; i++) {
+        featuresChecked[i].checked = false;
+      }
+    }, window.errorHandler);
+    evt.preventDefault();
   });
 })();
