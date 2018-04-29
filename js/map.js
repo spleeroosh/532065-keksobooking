@@ -9,9 +9,9 @@
   mapPinsContainer.addEventListener('click', function (evt) {
     var target = evt.target;
     var successHandlerForCard = function (nData) {
-      if (target.tagName === 'BUTTON' && target.className != 'map__pin map__pin--main') {
+      if (target.tagName === 'BUTTON' && target.className !== 'map__pin map__pin--main') {
         map.appendChild(window.card.render(nData[target.id]));
-      } else if (target.tagName === 'IMG' && target.parentElement.className != 'map__pin map__pin--main') {
+      } else if (target.tagName === 'IMG' && target.parentElement.className !== 'map__pin map__pin--main') {
         map.appendChild(window.card.render(nData[target.parentElement.id]));
       }
     };

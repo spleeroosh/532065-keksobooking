@@ -98,7 +98,7 @@
     /**
      * Функция создания массива данных для pins и cards
      */
-    /*getNew: function () {
+    /* getNew: function () {
       var flats = [];
       var newAvatars = AVATARS.sort(window.util.sortArray);
       for (var i = 0; i < window.PINS_QUANTITY; i++) {

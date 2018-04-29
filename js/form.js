@@ -77,17 +77,15 @@
   });
 
   form.addEventListener('submit', function (evt) {
-    window.backend.upload(new FormData(form), function (response) {
+    window.backend.upload(new FormData(form), function () {
       flatTypeButton[1].selected = true;
       inputFlatPrice.value = '';
       inputFlatPrice.min = MIN_PRICES['bungalo'];
       inputFlatPrice.placeholder = MIN_PRICES['bungalo'];
       titleForm.value = '';
       timeIn.value = '12:00';
-      timeOut.value = timein.value;
+      timeOut.value = timeIn.value;
 
-      var roomNumber = form.querySelector('#room_number');
-      var roomCapacity = form.querySelector('#capacity');
       roomNumber[0].selected = true;
       roomCapacity[0].disabled = true; // 3 guest
       roomCapacity[1].disabled = true; // 2 guest
