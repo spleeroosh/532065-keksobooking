@@ -85,6 +85,7 @@
       titleForm.value = '';
       timeIn.value = '12:00';
       timeOut.value = timeIn.value;
+      form.querySelector('#description').value = '';
 
       roomNumber[0].selected = true;
       roomCapacity[0].disabled = true; // 3 guest
