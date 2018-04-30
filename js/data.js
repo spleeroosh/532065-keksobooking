@@ -1,6 +1,6 @@
 'use strict';
 (function () {
-
+/*
   var AVATARS = [
     'img/avatars/user01.png',
     'img/avatars/user02.png',
@@ -61,10 +61,7 @@
   var ROOMS_MAX = 5;
   var GUESTS_MIN = 1;
   var GUESTS_MAX = 10;
-
-  var flats = [];
-  window.flats = flats;
-
+*/
   window.data = {
     /**
      * Добавляет в ДОМ список li с классами, соответствующими массиву
@@ -97,11 +94,12 @@
         photosFragment.appendChild(img);
       }
       return photosFragment;
-    },
+    }
     /**
      * Функция создания массива данных для pins и cards
      */
-    getNew: function () {
+    /* getNew: function () {
+      var flats = [];
       var newAvatars = AVATARS.sort(window.util.sortArray);
       for (var i = 0; i < window.PINS_QUANTITY; i++) {
         var x = window.util.randomInteger(X_MIN, X_MAX);
@@ -128,6 +126,7 @@
           }
         };
       }
-    }
+      return flats;
+    }*/
   };
 })();

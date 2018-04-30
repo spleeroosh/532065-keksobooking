@@ -13,13 +13,13 @@
      * @param {Array} dataArray Передаем массив данных для заполнения pins и cards
      * @return {*} Возвращаем pinsFragment с готовыми метками
      */
-    renderNew: function (dataArray) {
+    render: function (dataArray) {
       var pinsFragment = document.createDocumentFragment();
       for (var quantity = 0; quantity < PINS_QUANTITY; quantity++) {
         var pinsElement = mapPinsSimilar.cloneNode(true);
         pinsElement.alt = 'Метка объявления';
         pinsElement.id = quantity;
-        pinsElement.querySelector('img').src = dataArray[quantity].author;
+        pinsElement.querySelector('img').src = dataArray[quantity].author.avatar;
         pinsElement.style = 'left: ' + parseInt(dataArray[quantity].location.x + PIN_X, 10) + 'px; top: ' + parseInt(dataArray[quantity].location.y + PIN_Y, 10) + 'px';
         pinsFragment.appendChild(pinsElement);
       }
