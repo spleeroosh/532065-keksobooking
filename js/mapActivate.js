@@ -7,6 +7,7 @@
   var mapActivate = document.querySelector('.map__pin--main');
   window.form.querySelector('#address').value = parseInt(mapActivate.style.left + window.PIN_X, 10) + ', ' + parseInt(mapActivate.style.top + window.PIN_Y, 10);
   var fieldsetArray = window.form.querySelectorAll('fieldset');
+  window.flatsData = [];
 
   mapActivate.addEventListener('mouseup', function () {
     document.querySelector('.map').classList.remove('map--faded');
@@ -16,9 +17,14 @@
       fieldsetArray[n].disabled = false;
     }
     var successHandlerForPins = function (nData) {
-      window.mapPinsContainer.appendChild(window.pins.render(nData));
+      flatsData = nData;
+      flatsData.pop();
+      flatsData.pop();
+      window.mapPinsContainer.appendChild(window.pins.render(flatsData));
     };
-    window.backend.download(successHandlerForPins, window.errorHandler);
+    if (!window.flatsData.length) {
+      window.backend.download(successHandlerForPins, window.errorHandler);
+    }
   });
 
 

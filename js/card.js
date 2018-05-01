@@ -10,6 +10,9 @@
   var cardElement = mapCardSimilar.cloneNode(true);
 
   window.card = {
+    remove: function () {
+      cardElement.classList.add('hidden');
+    },
     /**
      * Функция отрисовки новой карточки
      * @param {Object} flatsObj Передаем объект массива flats
@@ -30,7 +33,7 @@
       cardElement.querySelector('.popup__photos').appendChild(window.data.getNewPhotos(flatsObj.offer.photos));
       cardElement.classList.remove('hidden');
       cardElement.querySelector('.popup__close').addEventListener('click', function () {
-        cardElement.classList.add('hidden');
+        card.remove();
       });
       return cardElement;
     }
