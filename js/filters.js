@@ -46,11 +46,11 @@
       return filteredPins.filter(function (pin) {
         var keyInPin;
         if (filters[key] === 'middle') {
-          return keyInPin = pin.offer[key] > 10000 && pin.offer[key] < 50000;
+          keyInPin = pin.offer[key] > 10000 && pin.offer[key] < 50000;
         } else if (filters[key] === 'low') {
-          return keyInPin = pin.offer[key] < 10000;
+          keyInPin = pin.offer[key] < 10000;
         } else if (filters[key] === 'high') {
-          return keyInPin = pin.offer[key] > 50000;
+          keyInPin = pin.offer[key] > 50000;
         }
         return keyInPin;
       });
@@ -87,7 +87,7 @@
         var keyInPin;
         for (var i = 0; i < pin.offer.features.length; i++) {
           if (pin.offer.features[i] === filters[key]) {
-            return keyInPin = true;
+            keyInPin = true;
           }
         }
         return keyInPin;
