@@ -17,6 +17,12 @@
 
   var filteredPins = [];
 
+  /**
+   * Фильрует метки по типу жилья
+   * @param {String} key передаем ключ состояния фильтра
+   * @param {Array} filters передаем массив с ключами состояния фильров
+   * @return {Array} возвращаем отфильтрованный массив объектов по типу жилья
+   */
   var typeFilter = function (key, filters) {
     if (filters[key] === 'any') {
       return window.flatsData;
@@ -27,6 +33,12 @@
     }
   };
 
+  /**
+   * Фильрует метки по цене
+   * @param {String} key передаем ключ состояния фильтра
+   * @param {Array} filters передаем массив с ключами состояния фильров
+   * @return {Array} возвращаем отфильтрованный массив объектов по цене
+   */
   var priceFilter = function (key, filters) {
     if (filters[key] === 'any') {
       return filteredPins;
@@ -43,6 +55,12 @@
     }
   };
 
+  /**
+   * Фильрует метки по количеству комнат или количеству гостей
+   * @param {String} key передаем ключ состояния фильтра
+   * @param {Array} filters передаем массив с ключами состояния фильров
+   * @return {Array} возвращаем отфильтрованный массив объектов по количеству комнат или количеству гостей
+   */
   var roomsAndGuestsFilter = function (key, filters) {
     if (filters[key] === 'any') {
       return filteredPins;
@@ -53,6 +71,12 @@
     }
   }
 
+  /**
+   * Фильрует метки по наличию дополнительных функций (wifi, dishwasher, conditioner, etc)
+   * @param {String} key передаем ключ состояния фильтра
+   * @param {Array} filters передаем массив с ключами состояния фильров
+   * @return {Array} возвращаем отфильтрованный массив объектов по наличию дополнительных функций
+   */
   var featuresFilter = function (key, filters) {
     if (filters[key] === 'none') {
       return filteredPins;
