@@ -69,7 +69,7 @@
         return pin.offer[key] === +filters[key];
       });
     }
-  }
+  };
 
   /**
    * Фильрует метки по наличию дополнительных функций (wifi, dishwasher, conditioner, etc)
@@ -89,7 +89,7 @@
         }
       });
     }
-  }
+  };
 
   /**
    * Фильтрует метки
