@@ -9,6 +9,19 @@
   var mapPinsSimilar = document.querySelector('template').content.querySelector('.map__pin');
   window.pinsData = [];
   window.pins = {
+
+    remove: function () {
+      var mapContainerNode = window.mapPinsContainer.querySelectorAll('button');
+      /**
+       * Убираем метки с карты, при изменении фильтров
+       */
+      mapContainerNode.forEach(function (it) {
+        if (it.className !== 'map__pin map__pin--main') {
+          window.mapPinsContainer.removeChild(it);
+        }
+      });
+    },
+
     /**
      * Функция отрисовки меток pins
      * @param {Array} dataArray Передаем массив данных для заполнения pins и cards

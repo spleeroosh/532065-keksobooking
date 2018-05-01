@@ -7,6 +7,7 @@
   var mapActivate = document.querySelector('.map__pin--main');
   window.form.querySelector('#address').value = parseInt(mapActivate.style.left + window.PIN_X, 10) + ', ' + parseInt(mapActivate.style.top + window.PIN_Y, 10);
   var fieldsetArray = window.form.querySelectorAll('fieldset');
+  console.log(fieldsetArray);
   window.flatsData = [];
 
   mapActivate.addEventListener('mouseup', function () {
@@ -14,8 +15,11 @@
     window.form.querySelector('#address').value = parseInt(mapActivate.style.left + window.PIN_X, 10) + ', ' + parseInt(mapActivate.style.top + window.PIN_Y, 10);
     window.form.classList.remove('ad-form--disabled');
     for (var n = 0; n < fieldsetArray.length; n++) {
-      fieldsetArray[n].disabled = false;
+      if (!fieldsetArray[n].querySelector('#address')) {
+        fieldsetArray[n].disabled = false;
+      }
     }
+
     var successHandlerForPins = function (nData) {
       window.flatsData = nData;
       window.flatsData.pop();

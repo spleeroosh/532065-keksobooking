@@ -77,32 +77,13 @@
   });
 
   form.addEventListener('submit', function (evt) {
-    window.backend.upload(new FormData(form), function () {
-      flatTypeButton[1].selected = true;
-      inputFlatPrice.value = '';
-      inputFlatPrice.min = MIN_PRICES['bungalo'];
-      inputFlatPrice.placeholder = MIN_PRICES['bungalo'];
-      titleForm.value = '';
-      timeIn.value = '12:00';
-      timeOut.value = timeIn.value;
-      form.querySelector('#description').value = '';
+    window.backend.upload(new FormData(form), window.reset, window.errorHandler);
+    document.querySelector('.success').classList.remove('hidden');
+    evt.preventDefault();
+  });
 
-      roomNumber[0].selected = true;
-      roomCapacity[0].disabled = true; // 3 guest
-      roomCapacity[1].disabled = true; // 2 guest
-      roomCapacity[2].disabled = false; // 1 guest
-      roomCapacity[3].disabled = true; // 0 guest
-      roomCapacity[2].selected = true;
-
-      document.querySelector('.map__pin--main').style.left = '570px';
-      document.querySelector('.map__pin--main').style.top = '375px';
-      form.querySelector('#address').value = '570, 375';
-
-      var featuresChecked = form.querySelectorAll('.feature__checkbox');
-      for (var i = 0; i < featuresChecked.length; i++) {
-        featuresChecked[i].checked = false;
-      }
-    }, window.errorHandler);
+  form.addEventListener('reset', function (evt) {
+    window.reset();
     evt.preventDefault();
   });
 })();

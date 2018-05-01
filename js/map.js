@@ -6,6 +6,10 @@
   var map = document.querySelector('.map');
   window.mapPinsContainer = mapPinsContainer;
 
+  /**
+   * Отрисовывает карточку, по данным одной метки
+   * @param {Object} obj передаем данные одной метки
+   */
   var showTheCard = function (obj) {
     map.appendChild(window.card.render(obj));
   };

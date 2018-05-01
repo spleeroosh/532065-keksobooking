@@ -1,5 +1,9 @@
 'use strict';
 (function () {
+  /**
+   * Обрабатываем ошибки, при работе с сетью, выводит сообщение с ошибкой на экран
+   * @param {String} errorMessage
+   */
   window.errorHandler = function (errorMessage) {
     var node = document.createElement('div');
     node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';

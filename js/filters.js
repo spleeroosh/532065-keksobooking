@@ -131,20 +131,16 @@
   };
 
   filtersForm.addEventListener('change', function (evt) {
-
     var target = evt.target;
+    window.card.remove(); // Скрываем карточку, при изменении фильтров
+    window.pins.remove(); // Удаляем метки с карты
 
-    var mapContainerNode = window.mapPinsContainer.querySelectorAll('button');
-    window.card.remove();
-    mapContainerNode.forEach(function (it) {
-      if (it.className !== 'map__pin map__pin--main') {
-        window.mapPinsContainer.removeChild(it);
-      }
-    });
-
+    /**
+     * Рендерим метки, при изменении фильтров
+     */
     if (target.tagName === 'SELECT' || target.tagName === 'INPUT') {
       window.mapPinsContainer.appendChild(window.pins.render(mapFilter(target, filterData)));
     }
-
   });
+
 })();
