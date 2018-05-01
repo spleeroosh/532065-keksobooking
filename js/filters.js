@@ -44,13 +44,15 @@
       return filteredPins;
     } else {
       return filteredPins.filter(function (pin) {
+        var keyInPin;
         if (filters[key] === 'middle') {
-          return pin.offer[key] > 10000 && pin.offer[key] < 50000;
+          return keyInPin = pin.offer[key] > 10000 && pin.offer[key] < 50000;
         } else if (filters[key] === 'low') {
-          return pin.offer[key] < 10000;
+          return keyInPin = pin.offer[key] < 10000;
         } else if (filters[key] === 'high') {
-          return pin.offer[key] > 50000;
+          return keyInPin = pin.offer[key] > 50000;
         }
+        return keyInPin;
       });
     }
   };
@@ -82,11 +84,13 @@
       return filteredPins;
     } else {
       return filteredPins.filter(function (pin) {
+        var keyInPin;
         for (var i = 0; i < pin.offer.features.length; i++) {
           if (pin.offer.features[i] === filters[key]) {
-            return true;
+            return keyInPin = true;
           }
         }
+        return keyInPin;
       });
     }
   };
