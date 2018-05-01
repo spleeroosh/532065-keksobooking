@@ -17,10 +17,10 @@
       fieldsetArray[n].disabled = false;
     }
     var successHandlerForPins = function (nData) {
-      flatsData = nData;
-      flatsData.pop();
-      flatsData.pop();
-      window.mapPinsContainer.appendChild(window.pins.render(flatsData));
+      window.flatsData = nData;
+      window.flatsData.pop();
+      window.flatsData.pop();
+      window.mapPinsContainer.appendChild(window.pins.render(window.flatsData));
     };
     if (!window.flatsData.length) {
       window.backend.download(successHandlerForPins, window.errorHandler);

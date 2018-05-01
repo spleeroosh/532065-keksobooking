@@ -15,7 +15,7 @@
      * @return {*} Возвращаем pinsFragment с готовыми метками
      */
     render: function (dataArray) {
-      pinsData = dataArray;
+      window.pinsData = dataArray;
       var pinsFragment = document.createDocumentFragment();
       for (var quantity = 0; quantity < dataArray.length; quantity++) {
         var pinsElement = mapPinsSimilar.cloneNode(true);

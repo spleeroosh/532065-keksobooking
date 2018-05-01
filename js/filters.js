@@ -1,10 +1,6 @@
 'use strict';
 (function () {
   var filtersForm = document.querySelector('.map__filters');
-  var housingType = filtersForm.querySelector('#housing-type');
-  var housingPrice = filtersForm.querySelector('#housing-price');
-  var housingRooms = filtersForm.querySelector('#housing-rooms');
-  var housingGuests = filtersForm.querySelector('#housing-guests');
 
   var filterData = {
     type: 'any',
@@ -19,67 +15,67 @@
     conditioner: 'none'
   };
 
-/**
- * Фильтрует метки
- * @param {DOMElement} target Объект, на который кликнули
- * @param {Object} filters Массив фильтров, примененных к меткам
- * @return {Array} Возвращаем массив отфильтрованных меток
- */
+  /**
+   * Фильтрует метки
+   * @param {DOMElement} target Объект, на который кликнули
+   * @param {Object} filters Массив фильтров, примененных к меткам
+   * @return {Array} Возвращаем массив отфильтрованных меток
+   */
   var mapFilter = function (target, filters) {
-
+    var filterKey;
     if (target.tagName === 'INPUT') {
-      var filterKey = target.id.replace('filter-', '');
-      if (filterData[filterKey] === 'none') {
-        filterData[filterKey] = filterKey;
+      filterKey = target.id.replace('filter-', '');
+      if (filters[filterKey] === 'none') {
+        filters[filterKey] = filterKey;
       } else {
-        filterData[filterKey] = 'none';
+        filters[filterKey] = 'none';
       }
     } else {
-      var filterKey = target.id.replace('housing-', '');
-      filterData[filterKey] = target.value;
+      filterKey = target.id.replace('housing-', '');
+      filters[filterKey] = target.value;
     }
 
 
     var filteredPins = [];
 
-    Object.keys(filterData).forEach(function (key) {
+    Object.keys(filters).forEach(function (key) {
       if (key === 'type') {
-        if (filterData[key] === 'any') {
+        if (filters[key] === 'any') {
           filteredPins = window.flatsData;
         } else {
           filteredPins = window.flatsData.filter(function (pin) {
-            return pin.offer[key] === filterData[key];
+            return pin.offer[key] === filters[key];
           });
         }
       } else if (key === 'price') {
-        if (filterData[key] === 'any') {
+        if (filters[key] === 'any') {
           filteredPins = filteredPins;
         } else {
           filteredPins = filteredPins.filter(function (pin) {
-            if (filterData[key] === 'middle') {
-              return  pin.offer[key] > 10000  && pin.offer[key] < 50000;
-            } else if (filterData[key] === 'low') {
+            if (filters[key] === 'middle') {
+              return pin.offer[key] > 10000 && pin.offer[key] < 50000;
+            } else if (filters[key] === 'low') {
               return pin.offer[key] < 10000;
-            } else if (filterData[key] === 'high') {
+            } else if (filters[key] === 'high') {
               return pin.offer[key] > 50000;
             }
           });
         }
       } else if (key === 'rooms' || key === 'guests') {
-        if (filterData[key] === 'any') {
+        if (filters[key] === 'any') {
           filteredPins = filteredPins;
         } else {
           filteredPins = filteredPins.filter(function (pin) {
-            return pin.offer[key] === +filterData[key];
+            return pin.offer[key] === +filters[key];
           });
         }
       } else {
-        if (filterData[key] === 'none') {
+        if (filters[key] === 'none') {
           filteredPins = filteredPins;
         } else {
           filteredPins = filteredPins.filter(function (pin) {
             for (var i = 0; i < pin.offer.features.length; i++) {
-              if (pin.offer.features[i] === filterData[key]) {
+              if (pin.offer.features[i] === filters[key]) {
                 return true;
               }
             }
@@ -94,17 +90,17 @@
 
     var target = evt.target;
 
-    var mapContainerNode = mapPinsContainer.querySelectorAll('button');
+    var mapContainerNode = window.mapPinsContainer.querySelectorAll('button');
     window.card.remove();
     mapContainerNode.forEach(function (it) {
       if (it.className !== 'map__pin map__pin--main') {
-        mapPinsContainer.removeChild(it);
+        window.mapPinsContainer.removeChild(it);
       }
     });
 
     if (target.tagName === 'SELECT' || target.tagName === 'INPUT') {
-        window.mapPinsContainer.appendChild(window.pins.render(mapFilter(target, filterData)));
-    };
+      window.mapPinsContainer.appendChild(window.pins.render(mapFilter(target, filterData)));
+    }
 
   });
 })();

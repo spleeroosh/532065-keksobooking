@@ -5,9 +5,11 @@
   var mapPinsContainer = document.querySelector('.map__pins');
   var map = document.querySelector('.map');
   window.mapPinsContainer = mapPinsContainer;
+
   var showTheCard = function (obj) {
-    map.appendChild(window.card.render(obj))
-  }
+    map.appendChild(window.card.render(obj));
+  };
+
   mapPinsContainer.addEventListener('click', function (evt) {
     var target = evt.target;
     if (target.tagName === 'BUTTON' && target.className !== 'map__pin map__pin--main') {

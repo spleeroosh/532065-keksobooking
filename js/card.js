@@ -33,7 +33,7 @@
       cardElement.querySelector('.popup__photos').appendChild(window.data.getNewPhotos(flatsObj.offer.photos));
       cardElement.classList.remove('hidden');
       cardElement.querySelector('.popup__close').addEventListener('click', function () {
-        card.remove();
+        window.card.remove();
       });
       return cardElement;
     }
