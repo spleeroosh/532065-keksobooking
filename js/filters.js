@@ -15,6 +15,58 @@
     conditioner: 'none'
   };
 
+  var filteredPins = [];
+
+  var typeFilter = function (key, filters) {
+    if (filters[key] === 'any') {
+      return window.flatsData;
+    } else {
+      return window.flatsData.filter(function (pin) {
+        return pin.offer[key] === filters[key];
+      });
+    }
+  };
+
+  var priceFilter = function (key, filters) {
+    if (filters[key] === 'any') {
+      return filteredPins;
+    } else {
+      return filteredPins.filter(function (pin) {
+        if (filters[key] === 'middle') {
+          return pin.offer[key] > 10000 && pin.offer[key] < 50000;
+        } else if (filters[key] === 'low') {
+          return pin.offer[key] < 10000;
+        } else if (filters[key] === 'high') {
+          return pin.offer[key] > 50000;
+        }
+      });
+    }
+  };
+
+  var roomsAndGuestsFilter = function (key, filters) {
+    if (filters[key] === 'any') {
+      return filteredPins;
+    } else {
+      return filteredPins.filter(function (pin) {
+        return pin.offer[key] === +filters[key];
+      });
+    }
+  }
+
+  var featuresFilter = function (key, filters) {
+    if (filters[key] === 'none') {
+      return filteredPins;
+    } else {
+      return filteredPins.filter(function (pin) {
+        for (var i = 0; i < pin.offer.features.length; i++) {
+          if (pin.offer.features[i] === filters[key]) {
+            return true;
+          }
+        }
+      });
+    }
+  }
+
   /**
    * Фильтрует метки
    * @param {DOMElement} target Объект, на который кликнули
@@ -35,54 +87,18 @@
       filters[filterKey] = target.value;
     }
 
-
-    var filteredPins = [];
-
     Object.keys(filters).forEach(function (key) {
       if (key === 'type') {
-        if (filters[key] === 'any') {
-          filteredPins = window.flatsData;
-        } else {
-          filteredPins = window.flatsData.filter(function (pin) {
-            return pin.offer[key] === filters[key];
-          });
-        }
+        filteredPins = typeFilter(key, filters);
       } else if (key === 'price') {
-        if (filters[key] === 'any') {
-          filteredPins = filteredPins;
-        } else {
-          filteredPins = filteredPins.filter(function (pin) {
-            if (filters[key] === 'middle') {
-              return pin.offer[key] > 10000 && pin.offer[key] < 50000;
-            } else if (filters[key] === 'low') {
-              return pin.offer[key] < 10000;
-            } else if (filters[key] === 'high') {
-              return pin.offer[key] > 50000;
-            }
-          });
-        }
+        filteredPins = priceFilter(key, filters);
       } else if (key === 'rooms' || key === 'guests') {
-        if (filters[key] === 'any') {
-          filteredPins = filteredPins;
-        } else {
-          filteredPins = filteredPins.filter(function (pin) {
-            return pin.offer[key] === +filters[key];
-          });
-        }
+        filteredPins = roomsAndGuestsFilter(key, filters);
       } else {
-        if (filters[key] === 'none') {
-          filteredPins = filteredPins;
-        } else {
-          filteredPins = filteredPins.filter(function (pin) {
-            for (var i = 0; i < pin.offer.features.length; i++) {
-              if (pin.offer.features[i] === filters[key]) {
-                return true;
-              }
-            }
-          });
-        }
+        filteredPins = featuresFilter(key, filters);
       }
     });
+
     return filteredPins;
   };
 
