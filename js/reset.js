@@ -22,8 +22,8 @@
     window.form.querySelector('#timeout').value = window.form.querySelector('#timein').value;
     window.form.querySelector('#description').value = '';
 
-    var roomNumber = form.querySelector('#room_number');
-    var roomCapacity = form.querySelector('#capacity');
+    var roomNumber = window.form.querySelector('#room_number');
+    var roomCapacity = window.form.querySelector('#capacity');
     roomNumber[0].selected = true;
     roomCapacity[0].disabled = true; // 3 guest
     roomCapacity[1].disabled = true; // 2 guest
@@ -35,7 +35,7 @@
     document.querySelector('.map__pin--main').style.top = '375px';
     window.form.querySelector('#address').value = '570, 375';
 
-    var featuresChecked = form.querySelectorAll('.feature__checkbox');
+    var featuresChecked = window.form.querySelectorAll('.feature__checkbox');
     for (var i = 0; i < featuresChecked.length; i++) {
       featuresChecked[i].checked = false;
     }
