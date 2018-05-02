@@ -4,7 +4,7 @@
   /**
    * Сбрасывает состояние страницы
    */
-  window.reset = function () {
+  window.formReset = function () {
     document.querySelector('.map').classList.add('map--faded');
     window.form.classList.add('ad-form--disabled');
     var fieldsetArray = window.form.querySelectorAll('fieldset');
@@ -13,6 +13,7 @@
     }
     window.card.remove(); // Скрываем карточку, при изменении фильтров
     window.pins.remove(); // Удаляем метки с карты
+
     window.form.querySelector('#type')[1].selected = true;
     window.form.querySelector('#price').value = '';
     window.form.querySelector('#price').min = 0;
@@ -24,12 +25,16 @@
 
     var roomNumber = window.form.querySelector('#room_number');
     var roomCapacity = window.form.querySelector('#capacity');
-    roomNumber[0].selected = true;
-    roomCapacity[0].disabled = true; // 3 guest
-    roomCapacity[1].disabled = true; // 2 guest
-    roomCapacity[2].disabled = false; // 1 guest
-    roomCapacity[3].disabled = true; // 0 guest
-    roomCapacity[2].selected = true;
+    document.querySelector('#room_number').selectedIndex = null;
+
+    for (var i = 0; i < roomCapacity.length; i++) {
+      if (roomCapacity[i].value === '1') {
+        roomCapacity[i].disabled = false;
+        roomCapacity[i].selected = true;
+      } else {
+        roomCapacity[i].disabled = true;
+      }
+    }
 
     document.querySelector('.map__pin--main').style.left = '570px';
     document.querySelector('.map__pin--main').style.top = '375px';

@@ -44,11 +44,14 @@
   var roomNumber = form.querySelector('#room_number');
   var roomCapacity = form.querySelector('#capacity');
 
-  roomCapacity[0].disabled = true; // 3 guest
-  roomCapacity[1].disabled = true; // 2 guest
-  roomCapacity[2].disabled = false; // 1 guest
-  roomCapacity[3].disabled = true; // 0 guest
-  roomCapacity[2].selected = true;
+  for (var i = 0; i < roomCapacity.length; i++) {
+    if (roomCapacity[i].value === '1') {
+      roomCapacity[i].disabled = false;
+      roomCapacity[i].selected = true;
+    } else {
+      roomCapacity[i].disabled = true;
+    }
+  }
 
   roomNumber.addEventListener('change', function () {
     var selectedRoomNumber = roomNumber.value;
@@ -66,13 +69,13 @@
   });
 
   form.addEventListener('submit', function (evt) {
-    window.backend.upload(new FormData(form), window.reset, window.errorHandler);
+    window.backend.upload(new FormData(form), window.formReset, window.errorHandler);
     document.querySelector('.success').classList.remove('hidden');
     evt.preventDefault();
   });
 
   form.addEventListener('reset', function (evt) {
-    window.reset();
+    window.formReset();
     evt.preventDefault();
   });
 })();

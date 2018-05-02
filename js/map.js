@@ -1,6 +1,7 @@
 'use strict';
 (function () {
-  window.MIN_ARRAY_LENGTH = 0;
+
+  var ESC_KEYCODE = 27;
 
   var mapPinsContainer = document.querySelector('.map__pins');
   var map = document.querySelector('.map');
@@ -16,14 +17,13 @@
 
   mapPinsContainer.addEventListener('click', function (evt) {
     var target = evt.target;
-    var closeEvt = evt;
     if (target.tagName === 'BUTTON' && target.className !== 'map__pin map__pin--main') {
       showTheCard(window.pinsData[target.id]);
     } else if (target.tagName === 'IMG' && target.parentElement.className !== 'map__pin map__pin--main') {
       showTheCard(window.pinsData[target.parentElement.id]);
     }
-    document.addEventListener('keydown', function (closeEvt) {
-      if (closeEvt.keyCode === 27) {
+    document.addEventListener('keydown', function (e) {
+      if (e.keyCode === ESC_KEYCODE) {
         window.card.remove();
         document.querySelector('.success').classList.add('hidden');
       }

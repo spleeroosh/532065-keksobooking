@@ -1,9 +1,7 @@
 'use strict';
 (function () {
-  var PINS_QUANTITY = 8;
   var PIN_X = 25;
   var PIN_Y = 70;
-  window.PINS_QUANTITY = PINS_QUANTITY;
   window.PIN_X = PIN_X;
   window.PIN_Y = PIN_Y;
   var mapPinsSimilar = document.querySelector('template').content.querySelector('.map__pin');
