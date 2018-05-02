@@ -16,6 +16,9 @@
     for (var n = 0; n < fieldsetArray.length; n++) {
       fieldsetArray[n].disabled = false;
     }
+    if (window.mapPinsContainer.querySelectorAll('button').length === 1) {
+      window.mapPinsContainer.appendChild(window.pins.render(window.flatsData));
+    }
 
     var successHandlerForPins = function (nData) {
       window.flatsData = nData.filter(function (pin, index) {

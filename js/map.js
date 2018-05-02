@@ -21,6 +21,12 @@
     } else if (target.tagName === 'IMG' && target.parentElement.className !== 'map__pin map__pin--main') {
       showTheCard(window.pinsData[target.parentElement.id]);
     }
+    document.addEventListener('keydown', function(evt) {
+      if (evt.keyCode === 27) {
+        window.card.remove();
+        document.querySelector('.success').classList.add('hidden');
+      }
+    });
   });
 })();
 
