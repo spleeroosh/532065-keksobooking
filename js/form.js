@@ -53,7 +53,7 @@
   roomNumber.addEventListener('change', function () {
     var selectedRoomNumber = roomNumber.value;
     for (var i = 0; i < roomCapacity.length; i++) {
-      if (selectedRoomNumber >= roomCapacity[i].value && roomCapacity[i].value != '0' && selectedRoomNumber != '100') {
+      if (selectedRoomNumber >= roomCapacity[i].value && roomCapacity[i].value !== '0' && selectedRoomNumber !== '100') {
         roomCapacity[i].disabled = false;
         roomCapacity[i].selected = true;
       } else if (selectedRoomNumber === '100' & roomCapacity[i].value === '0') {
