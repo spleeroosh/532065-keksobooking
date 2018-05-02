@@ -40,8 +40,12 @@
     window.form.querySelector('#address').value = '570, 375';
 
     var featuresChecked = window.form.querySelectorAll('.feature__checkbox');
-    for (var n = 0; n < featuresChecked.length; n++) {
-      featuresChecked[n].checked = false;
-    }
+    [].map.call(featuresChecked, function (obj) {
+      obj.checked = false;
+    });
+
+    // for (var n = 0; n < featuresChecked.length; n++) {
+    //   featuresChecked[n].checked = false;
+    // }
   };
 })();
