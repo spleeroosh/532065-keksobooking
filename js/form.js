@@ -59,7 +59,7 @@
       if (selectedRoomNumber >= roomCapacity[n].value && roomCapacity[n].value !== '0' && selectedRoomNumber !== '100') {
         roomCapacity[n].disabled = false;
         roomCapacity[n].selected = true;
-      } else if (selectedRoomNumber === '100' & roomCapacity[n].value === '0') {
+      } else if (selectedRoomNumber === '100' && roomCapacity[n].value === '0') {
         roomCapacity[n].disabled = false;
         roomCapacity[n].selected = true;
       } else {
