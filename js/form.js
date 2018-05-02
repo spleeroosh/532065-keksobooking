@@ -55,15 +55,15 @@
 
   roomNumber.addEventListener('change', function () {
     var selectedRoomNumber = roomNumber.value;
-    for (var i = 0; i < roomCapacity.length; i++) {
-      if (selectedRoomNumber >= roomCapacity[i].value && roomCapacity[i].value !== '0' && selectedRoomNumber !== '100') {
-        roomCapacity[i].disabled = false;
-        roomCapacity[i].selected = true;
-      } else if (selectedRoomNumber === '100' & roomCapacity[i].value === '0') {
-        roomCapacity[i].disabled = false;
-        roomCapacity[i].selected = true;
+    for (var n = 0; n < roomCapacity.length; n++) {
+      if (selectedRoomNumber >= roomCapacity[n].value && roomCapacity[n].value !== '0' && selectedRoomNumber !== '100') {
+        roomCapacity[n].disabled = false;
+        roomCapacity[n].selected = true;
+      } else if (selectedRoomNumber === '100' & roomCapacity[n].value === '0') {
+        roomCapacity[n].disabled = false;
+        roomCapacity[n].selected = true;
       } else {
-        roomCapacity[i].disabled = true;
+        roomCapacity[n].disabled = true;
       }
     }
   });

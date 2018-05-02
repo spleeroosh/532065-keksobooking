@@ -23,7 +23,6 @@
     window.form.querySelector('#timeout').value = window.form.querySelector('#timein').value;
     window.form.querySelector('#description').value = '';
 
-    var roomNumber = window.form.querySelector('#room_number');
     var roomCapacity = window.form.querySelector('#capacity');
     document.querySelector('#room_number').selectedIndex = null;
 
@@ -41,8 +40,8 @@
     window.form.querySelector('#address').value = '570, 375';
 
     var featuresChecked = window.form.querySelectorAll('.feature__checkbox');
-    for (var i = 0; i < featuresChecked.length; i++) {
-      featuresChecked[i].checked = false;
+    for (var n = 0; n < featuresChecked.length; n++) {
+      featuresChecked[n].checked = false;
     }
   };
 })();
