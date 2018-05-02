@@ -139,7 +139,7 @@
      * Рендерим метки, при изменении фильтров
      */
     if (target.tagName === 'SELECT' || target.tagName === 'INPUT') {
-      window.mapPinsContainer.appendChild(window.pins.render(mapFilter(target, filterData)));
+      window.mapPinsContainer.appendChild(window.pins.render(mapFilter(target, filterData), window.PINS_QUANTITY));
     }
   });
 

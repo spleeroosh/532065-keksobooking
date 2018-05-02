@@ -25,16 +25,19 @@
      * @param {Array} dataArray Передаем массив данных для заполнения pins и cards
      * @return {*} Возвращаем pinsFragment с готовыми метками
      */
-    render: function (dataArray) {
-      window.pinsData = dataArray;
+    render: function (dataArray, pinsQuantity) {
+      window.pinsData = dataArray.sort(window.util.sortArray).filter(function (pin, index) {
+        return index < pinsQuantity;
+      });
+
       var pinsFragment = document.createDocumentFragment();
-      for (var quantity = 0; quantity < dataArray.length; quantity++) {
+      for (var quantity = 0; quantity < window.pinsData.length; quantity++) {
         var pinsElement = mapPinsSimilar.cloneNode(true);
         pinsElement.alt = 'Метка объявления';
         pinsElement.id = quantity;
-        pinsElement.value = dataArray[quantity].offer.type;
-        pinsElement.querySelector('img').src = dataArray[quantity].author.avatar;
-        pinsElement.style = 'left: ' + parseInt(dataArray[quantity].location.x - PIN_X, 10) + 'px; top: ' + parseInt(dataArray[quantity].location.y - PIN_Y, 10) + 'px';
+        pinsElement.value = window.pinsData[quantity].offer.type;
+        pinsElement.querySelector('img').src = window.pinsData[quantity].author.avatar;
+        pinsElement.style = 'left: ' + parseInt(window.pinsData[quantity].location.x - PIN_X, 10) + 'px; top: ' + parseInt(window.pinsData[quantity].location.y - PIN_Y, 10) + 'px';
         pinsFragment.appendChild(pinsElement);
       }
       return pinsFragment;

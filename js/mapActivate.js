@@ -4,7 +4,7 @@
   var MAX_TOP = 620;
   var MIN_LEFT = 0;
   var MIN_TOP = 100;
-  var PINS_QUANTITY = 5;
+  window.PINS_QUANTITY = 5;
   var mapActivate = document.querySelector('.map__pin--main');
   window.form.querySelector('#address').value = parseInt(mapActivate.style.left + window.PIN_X, 10) + ', ' + parseInt(mapActivate.style.top + window.PIN_Y, 10);
   var fieldsetArray = window.form.querySelectorAll('fieldset');
@@ -22,10 +22,8 @@
     }
 
     var successHandlerForPins = function (nData) {
-      window.flatsData = nData.sort(window.util.sortArray).filter(function (pin, index) {
-        return index < PINS_QUANTITY;
-      });
-      window.mapPinsContainer.appendChild(window.pins.render(window.flatsData));
+      window.flatsData = nData;
+      window.mapPinsContainer.appendChild(window.pins.render(window.flatsData, PINS_QUANTITY));
     };
     if (!window.flatsData.length) {
       window.backend.download(successHandlerForPins, window.errorHandler);
