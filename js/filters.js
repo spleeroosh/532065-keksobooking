@@ -18,7 +18,7 @@
   var HOUSE_PRICES = {
     low: '10000',
     middle: '50000'
-  }
+  };
 
   var filteredPins = [];
 
