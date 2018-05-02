@@ -2,7 +2,8 @@
 (function () {
   var URL_POST = 'https://js.dump.academy/keksobooking';
   var URL_GET = 'https://js.dump.academy/keksobooking/data';
-  var load = function (onLoad, onError, data) {
+
+  var load = function (onLoad, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
     xhr.addEventListener('load', function () {
@@ -19,7 +20,8 @@
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
     return xhr;
-  }
+  };
+
   window.backend = {
     download: function (onLoad, onError) {
       var xhr = load(onLoad, onError);
