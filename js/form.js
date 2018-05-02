@@ -1,13 +1,16 @@
 'use strict';
 (function () {
+
   var MIN_PRICES = {
     palace: 10000,
     flat: 1000,
     house: 5000,
     bungalo: 0
   };
+
   var form = document.querySelector('.ad-form');
   window.form = form;
+
   var titleForm = form.querySelector('#title');
   titleForm.required = true;
   titleForm.setAttribute('minlength', '30');
@@ -49,30 +52,16 @@
 
   roomNumber.addEventListener('change', function () {
     var selectedRoomNumber = roomNumber.value;
-    if (selectedRoomNumber === '1') {
-      roomCapacity[0].disabled = true; // 3 guest
-      roomCapacity[1].disabled = true; // 2 guest
-      roomCapacity[2].disabled = false; // 1 guest
-      roomCapacity[3].disabled = true; // 0 guest
-      roomCapacity[2].selected = true;
-    } else if (selectedRoomNumber === '2') {
-      roomCapacity[0].disabled = true;
-      roomCapacity[1].disabled = false;
-      roomCapacity[2].disabled = false;
-      roomCapacity[3].disabled = true;
-      roomCapacity[1].selected = true;
-    } else if (selectedRoomNumber === '3') {
-      roomCapacity[0].disabled = false;
-      roomCapacity[1].disabled = false;
-      roomCapacity[2].disabled = false;
-      roomCapacity[3].disabled = true;
-      roomCapacity[0].selected = true;
-    } else if (selectedRoomNumber === '100') {
-      roomCapacity[0].disabled = true;
-      roomCapacity[1].disabled = true;
-      roomCapacity[2].disabled = true;
-      roomCapacity[3].disabled = false;
-      roomCapacity[3].selected = true;
+    for (var i = 0; i < roomCapacity.length; i++) {
+      if (selectedRoomNumber >= roomCapacity[i].value && roomCapacity[i].value != '0' && selectedRoomNumber != '100') {
+        roomCapacity[i].disabled = false;
+        roomCapacity[i].selected = true;
+      } else if (selectedRoomNumber === '100' & roomCapacity[i].value === '0') {
+        roomCapacity[i].disabled = false;
+        roomCapacity[i].selected = true;
+      } else {
+        roomCapacity[i].disabled = true;
+      }
     }
   });
 
