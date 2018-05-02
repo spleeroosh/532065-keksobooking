@@ -23,6 +23,7 @@
     /**
      * Функция отрисовки меток pins
      * @param {Array} dataArray Передаем массив данных для заполнения pins и cards
+     * @param {Number} pinsQuantity Получаем количество меток, которых нужно отрисовать
      * @return {*} Возвращаем pinsFragment с готовыми метками
      */
     render: function (dataArray, pinsQuantity) {

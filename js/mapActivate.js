@@ -18,12 +18,12 @@
       fieldsetArray[n].disabled = false;
     }
     if (window.mapPinsContainer.querySelectorAll('button').length === 1) {
-      window.mapPinsContainer.appendChild(window.pins.render(window.flatsData));
+      window.mapPinsContainer.appendChild(window.pins.render(window.flatsData, window.PINS_QUANTITY));
     }
 
     var successHandlerForPins = function (nData) {
       window.flatsData = nData;
-      window.mapPinsContainer.appendChild(window.pins.render(window.flatsData, PINS_QUANTITY));
+      window.mapPinsContainer.appendChild(window.pins.render(window.flatsData, window.PINS_QUANTITY));
     };
     if (!window.flatsData.length) {
       window.backend.download(successHandlerForPins, window.errorHandler);

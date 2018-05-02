@@ -15,6 +15,11 @@
     conditioner: 'none'
   };
 
+  var HOUSE_PRICES = {
+    low: '10000',
+    middle: '50000'
+  }
+
   var filteredPins = [];
 
   /**
@@ -46,11 +51,11 @@
       return filteredPins.filter(function (pin) {
         var keyInPin;
         if (filters[key] === 'middle') {
-          keyInPin = pin.offer[key] > 10000 && pin.offer[key] < 50000;
+          keyInPin = pin.offer[key] > HOUSE_PRICES.low && pin.offer[key] < HOUSE_PRICES.middle;
         } else if (filters[key] === 'low') {
-          keyInPin = pin.offer[key] < 10000;
+          keyInPin = pin.offer[key] < HOUSE_PRICES.low;
         } else if (filters[key] === 'high') {
-          keyInPin = pin.offer[key] > 50000;
+          keyInPin = pin.offer[key] > HOUSE_PRICES.middle;
         }
         return keyInPin;
       });

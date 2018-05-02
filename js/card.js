@@ -18,6 +18,7 @@
    */
   var getNewFeatures = function (array) {
     var featuresFragment = document.createDocumentFragment();
+    array.sort(window.util.sortArray);
     for (var i = 0; i < array.length; i++) {
       var li = document.createElement('li');
       li.className = 'popup__feature popup__feature--' + array[i];
