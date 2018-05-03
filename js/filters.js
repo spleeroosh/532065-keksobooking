@@ -136,12 +136,12 @@
 
   /**
    * Функция рендера меток после применения фильтров
-   * @param {Array} filtered массив отфильтрованных меток
+   * @param {Array} pins массив отфильтрованных меток
    */
-  var applyFilterToPins = function (filteredPins) {
+  var applyFilterToPins = function (pins) {
     window.card.remove(); // Скрываем карточку, при изменении фильтров
     window.pins.remove(); // Удаляем метки с карты
-    window.mapPinsContainer.appendChild(window.pins.render(filteredPins, window.PINS_QUANTITY));
+    window.mapPinsContainer.appendChild(window.pins.render(pins, window.PINS_QUANTITY));
   };
 
   filtersForm.addEventListener('change', function (evt) {
