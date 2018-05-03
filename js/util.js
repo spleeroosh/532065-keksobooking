@@ -1,6 +1,24 @@
 'use strict';
 (function () {
+  var DEBOUNCE_TIME = 500;
+  var lastTimeout;
+
   window.util = {
+
+    /**
+     * Функция для устранения дребезга, задает таймаут на выполнение
+     * @param {Function} func Передаем, в качестве параметра, функцию, которую нужно отложить
+     * @param {DOMElement} eventTarget Передаем ДОМ элемент, на который кликнули
+     */
+    debounce: function (fun, eventTarget) {
+      if (lastTimeout) {
+        window.clearTimeout(lastTimeout);
+      }
+      lastTimeout = window.setTimeout(function () {
+        fun(eventTarget);
+      }, DEBOUNCE_TIME);
+    },
+
     /**
     * Передаем функию в метод sort, для сортировки массива
     * @return {number} возвращаем случайное число в диапазоне

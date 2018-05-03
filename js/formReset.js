@@ -35,9 +35,11 @@
       }
     }
 
-    document.querySelector('.map__pin--main').style.left = '570px';
-    document.querySelector('.map__pin--main').style.top = '375px';
-    window.form.querySelector('#address').value = '570, 375';
+    window.mapActivate.style.left = '570px';
+    window.mapActivate.style.top = '375px';
+    window.showAddress();
+
+
 
     var featuresChecked = window.form.querySelectorAll('.feature__checkbox');
     [].map.call(featuresChecked, function (obj) {

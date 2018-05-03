@@ -135,16 +135,21 @@
     return filteredPins;
   };
 
-  filtersForm.addEventListener('change', function (evt) {
-    var target = evt.target;
+  /**
+   * Функция рендера меток после применения фильтров
+   * @param {DOMElement} targetEvt ДОМ элемент, по которому кликнули
+   */
+  var applyFilterToPins = function (targetEvt) {
     window.card.remove(); // Скрываем карточку, при изменении фильтров
     window.pins.remove(); // Удаляем метки с карты
+    window.mapPinsContainer.appendChild(window.pins.render(mapFilter(targetEvt, filterData), window.PINS_QUANTITY));
+  };
 
-    /**
-     * Рендерим метки, при изменении фильтров
-     */
+  filtersForm.addEventListener('change', function (evt) {
+    var target = evt.target;
+
     if (target.tagName === 'SELECT' || target.tagName === 'INPUT') {
-      window.mapPinsContainer.appendChild(window.pins.render(mapFilter(target, filterData), window.PINS_QUANTITY));
+      window.util.debounce(applyFilterToPins, target);
     }
   });
 
