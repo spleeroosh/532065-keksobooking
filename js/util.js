@@ -8,7 +8,7 @@
     /**
      * Функция для устранения дребезга, задает таймаут на выполнение
      * @param {Function} fun Передаем, в качестве параметра, функцию, которую нужно отложить
-     * @param {DOMElement} eventTarget Передаем ДОМ элемент, на который кликнули
+     * @param {Array} filteredPins Передаем массив отфильтрованных меток
      */
     debounce: function (fun, filteredPins) {
       if (lastTimeout) {
