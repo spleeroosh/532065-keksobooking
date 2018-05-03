@@ -20,9 +20,11 @@
     document.querySelector('.map').classList.remove('map--faded');
     window.showAddress();
     window.form.classList.remove('ad-form--disabled');
-    for (var n = 0; n < fieldsetArray.length; n++) {
-      fieldsetArray[n].disabled = false;
-    }
+
+    [].forEach.call(fieldsetArray, function (obj) {
+      obj.disabled = false;
+    });
+
     if (window.mapPinsContainer.querySelectorAll('button').length === 1) {
       window.mapPinsContainer.appendChild(window.pins.render(window.flatsData, window.PINS_QUANTITY));
     }

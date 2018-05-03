@@ -72,7 +72,6 @@
 
   form.addEventListener('submit', function (evt) {
     window.backend.upload(window.formReset, window.errorHandler, new FormData(form));
-    document.querySelector('.success').classList.remove('hidden');
     evt.preventDefault();
   });
 
