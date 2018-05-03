@@ -136,7 +136,7 @@
 
   /**
    * Функция рендера меток после применения фильтров
-   * @param {DOMElement} targetEvt ДОМ элемент, по которому кликнули
+   * @param {DOMElement} filtered массив отфильтрованных меток
    */
   var applyFilterToPins = function (filtered) {
     window.card.remove(); // Скрываем карточку, при изменении фильтров

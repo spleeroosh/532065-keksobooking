@@ -10,12 +10,12 @@
      * @param {Function} fun Передаем, в качестве параметра, функцию, которую нужно отложить
      * @param {DOMElement} eventTarget Передаем ДОМ элемент, на который кликнули
      */
-    debounce: function (fun, filtered) {
+    debounce: function (fun, filteredPins) {
       if (lastTimeout) {
         window.clearTimeout(lastTimeout);
       }
       lastTimeout = window.setTimeout(function () {
-        fun(filtered);
+        fun(filteredPins);
       }, DEBOUNCE_TIME);
     },
 
