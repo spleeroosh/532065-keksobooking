@@ -131,7 +131,6 @@
         filteredPins = featuresFilter(key, filters);
       }
     });
-
     return filteredPins;
   };
 
@@ -139,17 +138,17 @@
    * Функция рендера меток после применения фильтров
    * @param {DOMElement} targetEvt ДОМ элемент, по которому кликнули
    */
-  var applyFilterToPins = function (targetEvt) {
+  var applyFilterToPins = function (filtered) {
     window.card.remove(); // Скрываем карточку, при изменении фильтров
     window.pins.remove(); // Удаляем метки с карты
-    window.mapPinsContainer.appendChild(window.pins.render(mapFilter(targetEvt, filterData), window.PINS_QUANTITY));
+    window.mapPinsContainer.appendChild(window.pins.render(filtered, window.PINS_QUANTITY));
   };
 
   filtersForm.addEventListener('change', function (evt) {
     var target = evt.target;
-
+    var filtered = mapFilter(target, filterData);
     if (target.tagName === 'SELECT' || target.tagName === 'INPUT') {
-      window.util.debounce(applyFilterToPins, target);
+      window.util.debounce(applyFilterToPins, filtered);
     }
   });
 
