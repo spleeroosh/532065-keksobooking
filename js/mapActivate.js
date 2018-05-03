@@ -5,11 +5,11 @@
   var MIN_LEFT = 0;
   var MIN_TOP = 100;
   window.PINS_QUANTITY = 5;
-  window.mapActivate = document.querySelector('.map__pin--main');
+  var mapActivate = document.querySelector('.map__pin--main');
   var addressForm = window.form.querySelector('#address');
 
   window.showAddress = function () {
-    addressForm.value = parseInt(window.mapActivate.style.left + window.PIN_X, 10) + ', ' + parseInt(window.mapActivate.style.top + window.PIN_Y, 10);
+    addressForm.value = parseInt(mapActivate.style.left + window.PIN_X, 10) + ', ' + parseInt(mapActivate.style.top + window.PIN_Y, 10);
   };
   window.showAddress();
 
