@@ -23,7 +23,7 @@
   var inputFlatPrice = form.querySelector('#price');
   inputFlatPrice.required = true;
   inputFlatPrice.max = MAX_PRICE;
-  inputFlatPrice.placeholder = 0;
+  inputFlatPrice.placeholder = MIN_PRICES.bungalo;
 
   var flatTypeButton = form.querySelector('#type');
   flatTypeButton.addEventListener('change', function () {
