@@ -51,7 +51,7 @@
       return filteredPins.filter(function (pin) {
         var keyInPin;
         if (filters[key] === 'middle') {
-          keyInPin = pin.offer[key] > HOUSE_PRICES.low && pin.offer[key] < HOUSE_PRICES.middle;
+          keyInPin = pin.offer[key] >= HOUSE_PRICES.low && pin.offer[key] <= HOUSE_PRICES.middle;
         } else if (filters[key] === 'low') {
           keyInPin = pin.offer[key] < HOUSE_PRICES.low;
         } else if (filters[key] === 'high') {

@@ -23,13 +23,13 @@
     xhr.addEventListener('timeout', function () {
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
+    xhr.timeout = TIME_OUT; // 10s
     return xhr;
   };
 
   window.backend = {
     download: function (onLoad, onError) {
       var xhr = load(onLoad, onError);
-      xhr.timeout = TIME_OUT; // 10s
       xhr.open('GET', URL_GET);
       xhr.send();
     },
