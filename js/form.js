@@ -1,22 +1,29 @@
 'use strict';
 (function () {
+
   var MIN_PRICES = {
     palace: 10000,
     flat: 1000,
     house: 5000,
     bungalo: 0
   };
+
+  var MAX_PRICE = '1000000';
+  var MIN_LENGTH = '30';
+  var MAX_LENGTH = '100';
+
   var form = document.querySelector('.ad-form');
   window.form = form;
+
   var titleForm = form.querySelector('#title');
   titleForm.required = true;
-  titleForm.setAttribute('minlength', '30');
-  titleForm.setAttribute('maxlength', '100');
+  titleForm.setAttribute('minlength', MIN_LENGTH);
+  titleForm.setAttribute('maxlength', MAX_LENGTH);
 
   var inputFlatPrice = form.querySelector('#price');
   inputFlatPrice.required = true;
-  inputFlatPrice.max = '1000000';
-  inputFlatPrice.placeholder = 0;
+  inputFlatPrice.max = MAX_PRICE;
+  inputFlatPrice.placeholder = MIN_PRICES.bungalo;
 
   var flatTypeButton = form.querySelector('#type');
   flatTypeButton.addEventListener('change', function () {
@@ -41,68 +48,35 @@
   var roomNumber = form.querySelector('#room_number');
   var roomCapacity = form.querySelector('#capacity');
 
-  roomCapacity[0].disabled = true; // 3 guest
-  roomCapacity[1].disabled = true; // 2 guest
-  roomCapacity[2].disabled = false; // 1 guest
-  roomCapacity[3].disabled = true; // 0 guest
-  roomCapacity[2].selected = true;
+  for (var i = 0; i < roomCapacity.length; i++) {
+    if (roomCapacity[i].value === '1') {
+      roomCapacity[i].disabled = false;
+      roomCapacity[i].selected = true;
+    } else {
+      roomCapacity[i].disabled = true;
+    }
+  }
 
   roomNumber.addEventListener('change', function () {
     var selectedRoomNumber = roomNumber.value;
-    if (selectedRoomNumber === '1') {
-      roomCapacity[0].disabled = true; // 3 guest
-      roomCapacity[1].disabled = true; // 2 guest
-      roomCapacity[2].disabled = false; // 1 guest
-      roomCapacity[3].disabled = true; // 0 guest
-      roomCapacity[2].selected = true;
-    } else if (selectedRoomNumber === '2') {
-      roomCapacity[0].disabled = true;
-      roomCapacity[1].disabled = false;
-      roomCapacity[2].disabled = false;
-      roomCapacity[3].disabled = true;
-      roomCapacity[1].selected = true;
-    } else if (selectedRoomNumber === '3') {
-      roomCapacity[0].disabled = false;
-      roomCapacity[1].disabled = false;
-      roomCapacity[2].disabled = false;
-      roomCapacity[3].disabled = true;
-      roomCapacity[0].selected = true;
-    } else if (selectedRoomNumber === '100') {
-      roomCapacity[0].disabled = true;
-      roomCapacity[1].disabled = true;
-      roomCapacity[2].disabled = true;
-      roomCapacity[3].disabled = false;
-      roomCapacity[3].selected = true;
+    for (var n = 0; n < roomCapacity.length; n++) {
+      if (selectedRoomNumber >= roomCapacity[n].value && roomCapacity[n].value !== '0' && selectedRoomNumber !== '100'
+      || selectedRoomNumber === '100' && roomCapacity[n].value === '0') {
+        roomCapacity[n].disabled = false;
+        roomCapacity[n].selected = true;
+      } else {
+        roomCapacity[n].disabled = true;
+      }
     }
   });
 
   form.addEventListener('submit', function (evt) {
-    window.backend.upload(new FormData(form), function () {
-      flatTypeButton[1].selected = true;
-      inputFlatPrice.value = '';
-      inputFlatPrice.min = MIN_PRICES['bungalo'];
-      inputFlatPrice.placeholder = MIN_PRICES['bungalo'];
-      titleForm.value = '';
-      timeIn.value = '12:00';
-      timeOut.value = timeIn.value;
-      form.querySelector('#description').value = '';
+    window.backend.upload(window.formReset, window.errorHandler, new FormData(form));
+    evt.preventDefault();
+  });
 
-      roomNumber[0].selected = true;
-      roomCapacity[0].disabled = true; // 3 guest
-      roomCapacity[1].disabled = true; // 2 guest
-      roomCapacity[2].disabled = false; // 1 guest
-      roomCapacity[3].disabled = true; // 0 guest
-      roomCapacity[2].selected = true;
-
-      document.querySelector('.map__pin--main').style.left = '570px';
-      document.querySelector('.map__pin--main').style.top = '375px';
-      form.querySelector('#address').value = '570, 375';
-
-      var featuresChecked = form.querySelectorAll('.feature__checkbox');
-      for (var i = 0; i < featuresChecked.length; i++) {
-        featuresChecked[i].checked = false;
-      }
-    }, window.errorHandler);
+  form.addEventListener('reset', function (evt) {
+    window.formReset();
     evt.preventDefault();
   });
 })();

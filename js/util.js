@@ -1,6 +1,24 @@
 'use strict';
 (function () {
+  var DEBOUNCE_TIME = 500;
+  var lastTimeout;
+
   window.util = {
+
+    /**
+     * Функция для устранения дребезга, задает таймаут на выполнение
+     * @param {Function} fun Передаем, в качестве параметра, функцию, которую нужно отложить
+     * @param {Array} filteredPins Передаем массив отфильтрованных меток
+     */
+    debounce: function (fun, filteredPins) {
+      if (lastTimeout) {
+        window.clearTimeout(lastTimeout);
+      }
+      lastTimeout = window.setTimeout(function () {
+        fun(filteredPins);
+      }, DEBOUNCE_TIME);
+    },
+
     /**
     * Передаем функию в метод sort, для сортировки массива
     * @return {number} возвращаем случайное число в диапазоне

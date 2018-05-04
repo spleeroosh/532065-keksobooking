@@ -4,21 +4,38 @@
   var MAX_TOP = 620;
   var MIN_LEFT = 0;
   var MIN_TOP = 100;
+  window.PINS_QUANTITY = 5;
   var mapActivate = document.querySelector('.map__pin--main');
-  window.form.querySelector('#address').value = parseInt(mapActivate.style.left + window.PIN_X, 10) + ', ' + parseInt(mapActivate.style.top + window.PIN_Y, 10);
+  var addressForm = window.form.querySelector('#address');
+
+  window.showAddress = function () {
+    addressForm.value = parseInt(mapActivate.style.left + window.PIN_X, 10) + ', ' + parseInt(mapActivate.style.top + window.PIN_Y, 10);
+  };
+  window.showAddress();
+
   var fieldsetArray = window.form.querySelectorAll('fieldset');
+  window.flatsData = [];
 
   mapActivate.addEventListener('mouseup', function () {
     document.querySelector('.map').classList.remove('map--faded');
-    window.form.querySelector('#address').value = parseInt(mapActivate.style.left + window.PIN_X, 10) + ', ' + parseInt(mapActivate.style.top + window.PIN_Y, 10);
+    window.showAddress();
     window.form.classList.remove('ad-form--disabled');
-    for (var n = 0; n < fieldsetArray.length; n++) {
-      fieldsetArray[n].disabled = false;
+
+    [].forEach.call(fieldsetArray, function (obj) {
+      obj.disabled = false;
+    });
+
+    if (window.mapPinsContainer.querySelectorAll('button').length === 1) {
+      window.mapPinsContainer.appendChild(window.pins.render(window.flatsData, window.PINS_QUANTITY));
     }
+
     var successHandlerForPins = function (nData) {
-      window.mapPinsContainer.appendChild(window.pins.render(nData));
+      window.flatsData = nData;
+      window.mapPinsContainer.appendChild(window.pins.render(window.flatsData, window.PINS_QUANTITY));
     };
-    window.backend.download(successHandlerForPins, window.errorHandler);
+    if (!window.flatsData.length) {
+      window.backend.download(successHandlerForPins, window.errorHandler);
+    }
   });
 
 
