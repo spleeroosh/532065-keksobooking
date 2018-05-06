@@ -63,7 +63,7 @@
    * @param {Number} capacity количество мест в комнатах
    * @return {Boolean} Возвращает true, если комнат 100.
    */
-  function isRoomNumber100 (room, capacity) {
+  function isRoomNumber100(room, capacity) {
     return (room === '100' && capacity === '0');
   }
 
@@ -73,7 +73,7 @@
    * @param {Number} capacity количество мест в комнатах
    * @return {Boolean} Возвращает true, если комнат не 100.
    */
-  function isRoomNumber123 (room, capacity) {
+  function isRoomNumber123(room, capacity) {
     return (room >= capacity && capacity !== '0' && room !== '100');
   }
 
