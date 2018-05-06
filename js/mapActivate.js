@@ -48,33 +48,35 @@
 
     var onMouseMove = function (moveEvt) {
       moveEvt.preventDefault();
-
       var shift = {
         x: startCoords.x - moveEvt.clientX,
         y: startCoords.y - moveEvt.clientY
       };
+
+      var coordY = mapActivate.offsetTop - shift.y;
+      var coordX = mapActivate.offsetLeft - shift.x;
 
       startCoords = {
         x: moveEvt.clientX,
         y: moveEvt.clientY
       };
 
-      mapActivate.style.top = (mapActivate.offsetTop - shift.y) + 'px';
-      mapActivate.style.left = (mapActivate.offsetLeft - shift.x) + 'px';
+      mapActivate.style.top = (coordY) + 'px';
+      mapActivate.style.left = (coordX) + 'px';
 
-      if ((mapActivate.offsetLeft - shift.x) >= MAX_LEFT) {
+      if (coordX >= MAX_LEFT) {
         mapActivate.style.left = MAX_LEFT + 'px';
       }
 
-      if ((mapActivate.offsetLeft - shift.x <= 0)) {
+      if (coordX <= MIN_LEFT) {
         mapActivate.style.left = MIN_LEFT + 'px';
       }
 
-      if ((mapActivate.offsetTop - shift.y) >= MAX_TOP) {
+      if (coordY >= MAX_TOP) {
         mapActivate.style.top = MAX_TOP + 'px';
       }
 
-      if ((mapActivate.offsetTop - shift.y <= 100)) {
+      if (coordY <= MIN_TOP) {
         mapActivate.style.top = MIN_TOP + 'px';
       }
     };

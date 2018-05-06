@@ -1,5 +1,9 @@
 'use strict';
 (function () {
+  var START_COORDS = {
+    x: '570',
+    y: '375'
+  }
 
   /**
    * Сбрасывает состояние страницы
@@ -35,8 +39,8 @@
       }
     }
 
-    document.querySelector('.map__pin--main').style.left = '570px';
-    document.querySelector('.map__pin--main').style.top = '375px';
+    document.querySelector('.map__pin--main').style.left = START_COORDS.x + 'px';
+    document.querySelector('.map__pin--main').style.top = START_COORDS.y + 'px';
     window.showAddress();
 
     var featuresChecked = window.form.querySelectorAll('.feature__checkbox');
